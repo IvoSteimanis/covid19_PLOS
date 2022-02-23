@@ -6,7 +6,7 @@ __Affiliations:__ <sup>1</sup> Department of Economics, Philipps University Marb
 __*Correspondence to:__ Max Burger maximilian.burger@wiwi.uni-marburg.de <br>
 __ORCID:__ Burger: 0000-0003-2334-3885, Mayer: 0000-0003-0323-9124, Steimanis: 0000-0002-8550-4675 <br>
 __Classification:__ Social Sciences, Economic Sciences <br>
-__Keywords:__ caccination hesitancy, vaccination intentions, vaccination action, survey experiment, repeated information <br>
+__Keywords:__ vaccination hesitancy, vaccination intentions, vaccination action, survey experiment, repeated information <br>
 
 ## Abstract
 __Background:__ Many countries, such as Germany, struggle to vaccinate enough people against COVID-19 despite the availability of safe and efficient vaccines. With new variants emerging and the need for booster vaccinations, overcoming vaccination hesitancy gains importance. The research to date has unveiled some promising, albeit contentious, interventions to increase vaccination intentions. However, these have yet to be tested for their effectiveness in increasing vaccination rates. <br><br>

@@ -113,7 +113,7 @@ twoway (scatter unvacc_likelihood date, connect(L) ms(none) xline(22433, lpatter
 	(scatter unvacc_debunk date, connect(L) ms(none) ) ///
 	(scatter unvacc_benefits date, connect(L) ms(none) ) ///
 	(scatter unvacc_facilitation date, connect(L) ms(none) ), legend(order(1 "Germany" 2 "C: Control" 3 "T1: Debunking" 4 "T2: Benefits" 5 "T3: Facilitation") pos(2) cols(1) ring(0)) ytitle("Unvaccination rate (18 yeras and older)") xtitle("") title("{bf:A } Unvaccination rate Germany", pos(11) span) 
-graph save "$working_ANALYSIS/results/intermediate/FigureS9_a", replace
+graph save "$working_ANALYSIS/results/intermediate/FigureS10_a", replace
 
 	
 
@@ -124,15 +124,15 @@ use "$working_ANALYSIS/processed/corona_ger_clean.dta", clear
 keep if wave==2
 
 cibar vaccinated, over(treatment)   graphopts(graphregion(fcolor(none)) yline(.40269291, lpattern(dash) lcolor(gray) ) text(.40269291 4.8 "German   average", orientation(vertical) size(small) color(gray) ) ylab(0(0.1)1) legend(pos(2) ring(0) cols(1)) ytitle("Likellihood of getting vaccinated") title("{bf:B } Likelihood of getting vaccinated", pos(11) span) ) 
-graph save "$working_ANALYSIS/results/intermediate/FigureS9_b", replace
+graph save "$working_ANALYSIS/results/intermediate/FigureS10_b", replace
 
 
 graph combine "$working_ANALYSIS/results/intermediate/FigureS9_a" "$working_ANALYSIS/results/intermediate/FigureS9_b", row(1) xsize(7.5)
 gr_edit .plotregion1.graph1.legend.xoffset = 4
 gr_edit .plotregion1.graph1.yoffset = -1
 gr_edit .plotregion1.graph1.title.yoffset = 1
-gr save "$working_ANALYSIS/results/intermediate/FigureS9_external_validity.gph", replace
-gr export "$working_ANALYSIS/results/figures/FigureS9_external_validity.tif", replace width(4500)
+gr save "$working_ANALYSIS/results/intermediate/FigureS10_external_validity.gph", replace
+gr export "$working_ANALYSIS/results/figures/FigureS10_external_validity.tif", replace width(4500)
 
 
 

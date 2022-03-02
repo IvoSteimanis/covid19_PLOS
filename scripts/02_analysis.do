@@ -472,8 +472,31 @@ foreach x of varlist $five_c {
 }
 
 
+*Fig. S6.	Vaccination intentions by prioritization group
+gen d_priority = 1 if priority_group < 4
+replace d_priority = 0 if priority_group > 3
+lab var d_priority "Participant was in vaccination priority group 1 to 3."
+lab def prio 0 "No priority" 1 "Any priority", replace
+lab val d_priority prio
+gen priority = 0 if priority_group >3
+replace priority = 1 if priority_group == 1
+replace priority = 2 if priority_group == 2
+replace priority = 3 if priority_group == 3
+lab def prio_lab 0 "No priority (n=820)" 1 "Group 1 (n=33)" 2 "Group 2 (n=129)" 3 "Group 3 (n=342)", replace
+lab val priority prio_lab
 
-*Fig. S6.	Treatment effects on 5C
+cibar intent_mrna if wave == 1, over1(priority) bargap(10) barlabel(on) blsize(small) blfmt(%9.2f) blpos(11) graphopts(scale(1.2) ysize(2) xsize(3.165) legend(ring (1) pos(6) rows(2)) xla(, nogrid) yla(1(1)7, nogrid) title("{bf: A} mRNA Intentions by priority status")  ytitle("Average intention")) ciopts(lcolor(gs3) lpattern(dash))
+gr save "$working_ANALYSIS/results/intermediate/FigureS6_a.gph", replace
+
+cibar intent_mrna if wave == 1, over1(treatment_w1) over2(d_priority) bargap(10) barlabel(on) blsize(small) blfmt(%9.2f) blpos(11) graphopts(scale(1.2) ysize(2) xsize(3.165) legend(ring (1) pos(6) rows(1)) xla(, nogrid) yla(1(1)7, nogrid) title("{bf: B} Heterogeneous treatment effects")  ytitle("Average intention")) ciopts(lcolor(gs3) lpattern(dash))
+gr save "$working_ANALYSIS/results/intermediate/FigureS6_b.gph", replace
+
+gr combine  "$working_ANALYSIS/results/intermediate/FigureS6_a.gph"  "$working_ANALYSIS/results/intermediate/FigureS6_b.gph", rows(1)
+gr save "$working_ANALYSIS/results/intermediate/figureS6_priority.gph", replace
+gr export "$working_ANALYSIS/results/figures/figureS6_priority.tif", replace width(4500)
+
+
+*Fig. S7.	Treatment effects on 5C
 *Panel a: Wave 1
 foreach x of varlist $five_c {
 	reg `x' w1_t2 w1_t3 $control if wave == 1, vce(hc3)
@@ -482,7 +505,7 @@ foreach x of varlist $five_c {
 	local F1 = r(p)
 }
 coefplot  (fiveC_confidence_mrna, ) (fiveC_confidence_vector, ) (fiveC_complacency, ) (fiveC_constraints, ) (fiveC_calculation, ) (fiveC_collective, ), keep(w1_t2 w1_t3)  coeflabels(w1_t2  = "T1: Debunking"  w1_t3 = "T2: Benefits" ) xline(0, lpattern(dash) lcolor(gs3)) title("{bf: A} Survey Experiment (n=1324)", pos(11) span) xtitle("Regression estimated impact") msymbol(d)  xla(-0.75(0.25)0.75, nogrid) grid(none)  levels(95 90) ciopts(lwidth(0.3 1) lcolor(*.8 *.2) recast(rcap)) mlabel(cond(@pval<.01, "***", cond(@pval<.05, "**", cond(@pval<.1, "*", "")))) mlabsize() mlabposition(12) mlabgap(-0.1)  legend(order(3 "Confidence: mRNA" 6 "Confidence: Vector" 9 "Complacency" 12 "Constraints" 15 "Calculation" 18 "Collective") size() pos(6) ring(1) rows(2) bmargin(small)) xsize(3.465) ysize(2) scale(1.2) 
-gr save "$working_ANALYSIS/results/intermediate/FigureS6_a.gph", replace
+gr save "$working_ANALYSIS/results/intermediate/FigureS7_a.gph", replace
 
 *Panel b: Wave 2
 sort respondi_id wave
@@ -493,9 +516,9 @@ foreach x of varlist $five_c {
 	local F1 = r(p)
 }
 coefplot  (fiveC2_confidence_mrna, ) (fiveC2_confidence_vector, ) (fiveC2_complacency, ) (fiveC2_constraints, ) (fiveC2_calculation, ) (fiveC2_collective, ), keep(t2 t3 t4)  coeflabels(t2  = "T1: Debunking"  t3 = "T2: Benefits" t4 = "T3: Faciliation") xline(0, lpattern(dash) lcolor(gs3)) title("{bf: B} Follow-up (n=821)", pos(11) span) xtitle("Regression estimated impact", size()) msymbol(d)   xla(-0.75(0.25)0.75, nogrid) grid(none) levels(95 90) ciopts(lwidth(0.3 1) lcolor(*.8 *.2)  recast(rcap)) mlabel(cond(@pval<.01, "***", cond(@pval<.05, "**", cond(@pval<.1, "*", "")))) mlabsize() mlabposition(12) mlabgap(-0.1)  legend(order(3 "Confidence: mRNA" 6 "Confidence: Vector" 9 "Complacency" 12 "Constraints" 15 "Calculation" 18 "Collective") size() pos(6) ring(1) rows(2) bmargin(small)) xsize(3.465) ysize(2) scale(1.2)
-gr save "$working_ANALYSIS/results/intermediate/FigureS6_b.gph", replace
+gr save "$working_ANALYSIS/results/intermediate/FigureS7_b.gph", replace
 
-grc1leg "$working_ANALYSIS/results/intermediate/FigureS6_a.gph"  "$working_ANALYSIS/results/intermediate/FigureS6_b.gph",  rows(1) xsize(7.5)
+grc1leg "$working_ANALYSIS/results/intermediate/FigureS7_a.gph"  "$working_ANALYSIS/results/intermediate/FigureS7_b.gph",  rows(1) xsize(7.5)
 gr_edit .plotregion1.graph1.title.style.editstyle size(small) editcopy
 gr_edit .plotregion1.graph1.yaxis1.style.editstyle majorstyle(tickstyle(textstyle(size(vsmall)))) editcopy
 gr_edit .plotregion1.graph1.xaxis1.style.editstyle majorstyle(tickstyle(textstyle(size(vsmall)))) editcopy
@@ -507,8 +530,8 @@ gr_edit .plotregion1.graph2.xaxis1.style.editstyle majorstyle(tickstyle(textstyl
 gr_edit .plotregion1.graph2.xaxis1.title.style.editstyle size(vsmall) editcopy
 gr_edit .legend.Edit, style(labelstyle(size(vsmall))) style(labelstyle(color(custom)))
 gr_edit .legend.Edit , style(key_gap(tiny)) keepstyles 
-gr save "$working_ANALYSIS/results/intermediate/FigureS6_effects_5C.gph", replace
-gr export "$working_ANALYSIS/results/figures/FigureS6_effects_5C.tif", replace width(4500)
+gr save "$working_ANALYSIS/results/intermediate/FigureS7_effects_5C.gph", replace
+gr export "$working_ANALYSIS/results/figures/FigureS7_effects_5C.tif", replace width(4500)
 
 
 
@@ -578,7 +601,7 @@ outreg2 using "$working_ANALYSIS/results/tables/TableS17_vaccine_hesitancy_heter
 
 
 
-*Fig. S7.	Benefits treatment effects on inaction across socioeconomic groups
+*Fig. S8.	Benefits treatment effects on inaction across socioeconomic groups
 *median splits of control variables
 foreach x of varlist age adj_hh_income {
 	egen aux_`x' = median(`x') if panel==1 
@@ -614,8 +637,8 @@ gr_edit .plotregion1.plot18.style.editstyle marker(fillcolor("100 143 255*1.3"))
 gr_edit .plotregion1.plot16.style.editstyle area(linestyle(color("100 143 255*1.3"))) editcopy
 gr_edit .plotregion1.plot21.style.editstyle marker(fillcolor("120 94 240*1.3")) editcopy
 gr_edit .plotregion1.plot19.style.editstyle area(linestyle(color("120 94 240*1.3"))) editcopy
-gr save  "$working_ANALYSIS/results/intermediate/figureS7_benefits_splits.gph", replace
-gr export "$working_ANALYSIS/results/figures/figureS7_benefits_splits.tif", replace width(4500)
+gr save  "$working_ANALYSIS/results/intermediate/figureS8_benefits_splits.gph", replace
+gr export "$working_ANALYSIS/results/figures/figureS8_benefits_splits.tif", replace width(4500)
 
 
 
@@ -651,18 +674,18 @@ outreg2 using "$working_ANALYSIS/results/tables/TableS18_determinants_inaction",
 
 
 
-*Fig. S8.	Share of batch numbers correctly reported by treatment
+*Fig. S9.	Share of batch numbers correctly reported by treatment
 cibar batch_correct if wave == 2, over1(treatment) barlabel(on) blsize(8pt) blpos(11) gap(50) bargap(10)  graphopts(legend(rows(1) pos(6) size(8pt)) yla(0(0.2)1, nogrid) ytitle("Share of correctly reported batch numbers", size(8pt) margin(medsmall)) xsize(7.5) ) ciopts(lcolor(gs3) lpattern(dash))
 gr_edit .plotregion1.textbox1.xoffset = -0.5
 gr_edit .plotregion1.textbox2.xoffset = -0.5
 gr_edit .plotregion1.textbox3.xoffset = -0.5
 gr_edit .plotregion1.textbox4.xoffset = -0.5
-gr save  "$working_ANALYSIS/results/intermediate/FigS8_batchNr.gph", replace
-gr export "$working_ANALYSIS/results/figures/FigS8_batchNr.tif", replace width(4500)
+gr save  "$working_ANALYSIS/results/intermediate/FigS9_batchNr.gph", replace
+gr export "$working_ANALYSIS/results/figures/FigS9_batchNr.tif", replace width(4500)
 
 
 
-*Fig. S9.	Likelihood of getting vaccinated between May 2 and September 18
+*Fig. S10.	Likelihood of getting vaccinated between May 2 and September 18
 *Created in extra do-file "07_AppendixS10.do"
 
 

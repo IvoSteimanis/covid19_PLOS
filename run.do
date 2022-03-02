@@ -17,7 +17,7 @@
 * Set global Working Directory
 *--------------------------------------------------
 * Define this global macro to point where the replication folder is saved locally that includes this run.do script
-global working_ANALYSIS ""
+global working_ANALYSIS "C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS\"
 
 
 *--------------------------------------------------

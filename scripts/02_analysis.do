@@ -472,23 +472,11 @@ foreach x of varlist $five_c {
 }
 
 
-*Fig. S6.	Vaccination intentions by prioritization group
-gen d_priority = 1 if priority_group < 4
-replace d_priority = 0 if priority_group > 3
-lab var d_priority "Participant was in vaccination priority group 1 to 3."
-lab def prio 0 "No priority" 1 "Any priority", replace
-lab val d_priority prio
-gen priority = 0 if priority_group >3
-replace priority = 1 if priority_group == 1
-replace priority = 2 if priority_group == 2
-replace priority = 3 if priority_group == 3
-lab def prio_lab 0 "No priority (n=820)" 1 "Group 1 (n=33)" 2 "Group 2 (n=129)" 3 "Group 3 (n=342)", replace
-lab val priority prio_lab
-
-cibar intent_mrna if wave == 1, over1(priority) bargap(10) barlabel(on) blsize(small) blfmt(%9.2f) blpos(11) graphopts(scale(1.2) ysize(2) xsize(3.165) legend(ring (1) pos(6) rows(2)) xla(, nogrid) yla(1(1)7, nogrid) title("{bf: A} mRNA Intentions by priority status")  ytitle("Average intention")) ciopts(lcolor(gs3) lpattern(dash))
+*Fig. S6.	mRNA vaccination intentions
+cibar intent_mrna if wave == 1, over1(priority) bargap(10) barlabel(on) blsize(small) blfmt(%9.2f) blpos(11) graphopts(scale(1.2) ysize(2) xsize(3.165) legend(ring (1) pos(6) rows(2)) xla(, nogrid) yla(1(1)7, nogrid) title("{bf: A} by priority group")  ytitle("Average intention")) ciopts(lcolor(gs3) lpattern(dash))
 gr save "$working_ANALYSIS/results/intermediate/FigureS6_a.gph", replace
 
-cibar intent_mrna if wave == 1, over1(treatment_w1) over2(d_priority) bargap(10) barlabel(on) blsize(small) blfmt(%9.2f) blpos(11) graphopts(scale(1.2) ysize(2) xsize(3.165) legend(ring (1) pos(6) rows(1)) xla(, nogrid) yla(1(1)7, nogrid) title("{bf: B} Heterogeneous treatment effects")  ytitle("Average intention")) ciopts(lcolor(gs3) lpattern(dash))
+cibar intent_mrna if wave == 1, over1(treatment_w1) over2(d_priority) bargap(10) barlabel(on) blsize(small) blfmt(%9.2f) blpos(11) graphopts(scale(1.2) ysize(2) xsize(3.165) legend(ring (1) pos(6) rows(1)) xla(, nogrid) yla(1(1)7, nogrid) title("{bf: B} by priority group and treatment")  ytitle("Average intention")) ciopts(lcolor(gs3) lpattern(dash))
 gr save "$working_ANALYSIS/results/intermediate/FigureS6_b.gph", replace
 
 gr combine  "$working_ANALYSIS/results/intermediate/FigureS6_a.gph"  "$working_ANALYSIS/results/intermediate/FigureS6_b.gph", rows(1)

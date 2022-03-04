@@ -21,7 +21,7 @@ replace dropped = 0 if Comp1 <= -.19 | Comp1 >= 0.19
 encode var, gen(var_nr)
 save "$working_ANALYSIS/processed/dog_pca_pre-test", replace
 
-twoway (dropline Comp1 var_nr if dropped == 0, horizontal mlabel(Comp1) mlabformat(%12.2f) mlabposition(top)) (dropline Comp1 var_nr if dropped == 1, horizontal mlabel(Comp1)  mlabformat(%12.2f) mlabposition(top)  ), ylabel(1(1)17, valuelabel) xtitle(loadings) legend(order(1 "Excluded" 2 "Preserved") rows(1))ytitle("") title("{bf:A } First iteration", pos(11) span)
+twoway (dropline Comp1 var_nr if dropped == 0, horizontal mlabel(Comp1) mlabformat(%12.2f) mlabposition(top)) (dropline Comp1 var_nr if dropped == 1, horizontal mlabel(Comp1)  mlabformat(%12.2f) mlabposition(top)  ), ylabel(1(1)17, valuelabel) xtitle(loadings) legend(order(1 "Preserved" 2 "Excluded") rows(1))ytitle("") title("{bf:A } First iteration", pos(11) span)
 graph save "$working_ANALYSIS/results/intermediate/dog_loadings1", replace
 restore
 

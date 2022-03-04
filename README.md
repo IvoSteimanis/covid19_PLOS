@@ -1,6 +1,6 @@
 # Replication Package
 This repository contains the raw data and code that replicates tables and figures for the following paper: <br><br>
-__Title:__ Repeated information of benefits reduce COVID-19 vaccination hesitancy: Experimental evidence from Germany <br>
+__Title:__ Repeated information of benefits reduces COVID-19 vaccination hesitancy: Experimental evidence from Germany <br>
 __Authors:__ Max Burger<sup>1,*</sup>, Matthias Mayer<sup>1</sup> & Ivo Steimanis<sup>1</sup> <br>
 __Affiliations:__ <sup>1</sup> Department of Economics, Philipps University Marburg, 35032 Marburg, Germany <br>
 __*Correspondence to:__ Max Burger maximilian.burger@wiwi.uni-marburg.de <br>

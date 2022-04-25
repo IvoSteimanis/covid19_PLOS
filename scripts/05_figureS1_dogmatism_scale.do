@@ -74,7 +74,7 @@ gr_edit .legend.plotregion1.key[2].view.style.editstyle area(linestyle(color("22
 gr_edit .legend.plotregion1.key[2].view.style.editstyle marker(fillcolor("220 38 127")) editcopy
 gr_edit .plotregion1.graph1.plotregion1.plot2.style.editstyle marker(fillcolor("220 38 127")) editcopy
 gr_edit .plotregion1.graph2.plotregion1.plot2.style.editstyle marker(fillcolor("220 38 127")) editcopy
-gr export "$working_ANALYSIS/results/figures/FigureS1_dogmatism.tif", replace width(4500)
+gr export "$working_ANALYSIS/results/figures/figureS1_dogmatism.tif", replace width(4500)
 
 
 

@@ -1,52 +1,52 @@
-	(1)	(2)	(3)	(4)	(5)	(6)	(7)	(8)	(9)	(10)	(11)	(12)
-VARIABLES	intent_vector	intent_vector	intent_vector	intent_vector	intent_vector	intent_vector	intent_vector	intent_vector	intent_vector	intent_vector	intent_vector	intent_vector
-												
-w1_t2	0.05	0.12	0.19	0.17	0.04	0.12	0.05	0.12	0.19	0.17	0.04	0.12
-	(0.22)	(0.17)	(0.15)	(0.15)	(0.13)	(0.15)	(0.22)	(0.17)	(0.15)	(0.15)	(0.13)	(0.15)
-w1_t3	-0.07	0.18	0.20	0.19	0.09	0.14	-0.07	0.18	0.20	0.19	0.09	0.14
-	(0.22)	(0.17)	(0.15)	(0.15)	(0.13)	(0.15)	(0.22)	(0.17)	(0.15)	(0.15)	(0.13)	(0.15)
-no_action	-1.88***						-1.88***					
-	(0.16)						(0.16)					
-no_action_w1_t2	0.20						0.20					
-	(0.28)						(0.28)					
-no_action_w1_t3	0.44						0.44					
-	(0.28)						(0.28)					
-denied_vaccine_past		-0.98***						-0.98***				
-		(0.22)						(0.22)				
-denied_vaccine_past_w1_t2		-0.38						-0.38				
-		(0.37)						(0.37)				
-denied_vaccine_past_w1_t3		-0.38						-0.38				
-		(0.35)						(0.35)				
-z_c19_risk_index			0.44***						0.44***			
-			(0.08)						(0.08)			
-z_c19_risk_index_w1_t2			0.10						0.10			
-			(0.15)						(0.15)			
-z_c19_risk_index_w1_t3			0.06						0.06			
-			(0.14)						(0.14)			
-z_NA				0.38***						0.38***		
-				(0.08)						(0.08)		
-z_NA_w1_t2				0.23						0.23		
-				(0.16)						(0.16)		
-z_NA_w1_t3				0.28*						0.28*		
-				(0.14)						(0.14)		
-z_net_anticipated_regret					1.21***						1.21***	
-					(0.07)						(0.07)	
-z_net_anticipated_regret_w1_t2					-0.09						-0.09	
-					(0.11)						(0.11)	
-z_net_anticipated_regret_w1_t3					-0.05						-0.05	
-					(0.11)						(0.11)	
-z_dogmatism						-0.15*						-0.15*
-						(0.09)						(0.09)
-z_dogmatism_w1_t2						-0.02						-0.02
-						(0.16)						(0.16)
-z_dogmatism_w1_t3						0.06						0.06
-						(0.15)						(0.15)
-Constant	4.42***	3.27***	3.09***	3.14***	3.40***	3.14***	4.42***	3.27***	3.09***	3.14***	3.40***	3.14***
-	(0.27)	(0.27)	(0.26)	(0.26)	(0.23)	(0.27)	(0.27)	(0.27)	(0.26)	(0.26)	(0.23)	(0.27)
-												
-Observations	1,324	1,324	1,324	1,324	1,324	1,324	1,324	1,324	1,324	1,324	1,324	1,324
-Adjusted R-squared	0.21	0.11	0.12	0.12	0.33	0.08	0.21	0.11	0.12	0.12	0.33	0.08
-Interaction: T1 sig.	0.000	0.000	0.000	0.000	0.000	0.194	0.000	0.000	0.000	0.000	0.000	0.194
-Interaction: T2 sig.	0.000	0.000	0.000	0.000	0.000	0.266	0.000	0.000	0.000	0.000	0.000	0.266
-Robust standard errors in parentheses												
-*** p<0.01, ** p<0.05, * p<0.1												
+	(1)	(2)	(3)	(4)	(5)	(6)
+VARIABLES	intent_vector	intent_vector	intent_vector	intent_vector	intent_vector	intent_vector
+						
+w1_t2	0.05	0.12	0.19	0.17	0.04	0.12
+	(0.22)	(0.17)	(0.15)	(0.15)	(0.13)	(0.15)
+w1_t3	-0.07	0.18	0.20	0.19	0.09	0.14
+	(0.22)	(0.17)	(0.15)	(0.15)	(0.13)	(0.15)
+no_action	-1.88***					
+	(0.16)					
+no_action_w1_t2	0.20					
+	(0.28)					
+no_action_w1_t3	0.44					
+	(0.28)					
+denied_vaccine_past		-0.98***				
+		(0.22)				
+denied_vaccine_past_w1_t2		-0.38				
+		(0.37)				
+denied_vaccine_past_w1_t3		-0.38				
+		(0.35)				
+z_c19_risk_index			0.44***			
+			(0.08)			
+z_c19_risk_index_w1_t2			0.10			
+			(0.15)			
+z_c19_risk_index_w1_t3			0.06			
+			(0.14)			
+z_NA				0.38***		
+				(0.08)		
+z_NA_w1_t2				0.23		
+				(0.16)		
+z_NA_w1_t3				0.28*		
+				(0.14)		
+z_net_anticipated_regret					1.21***	
+					(0.07)	
+z_net_anticipated_regret_w1_t2					-0.09	
+					(0.11)	
+z_net_anticipated_regret_w1_t3					-0.05	
+					(0.11)	
+z_dogmatism						-0.15*
+						(0.09)
+z_dogmatism_w1_t2						-0.02
+						(0.16)
+z_dogmatism_w1_t3						0.06
+						(0.15)
+Constant	4.42***	3.27***	3.09***	3.14***	3.40***	3.14***
+	(0.27)	(0.27)	(0.26)	(0.26)	(0.23)	(0.27)
+						
+Observations	1,324	1,324	1,324	1,324	1,324	1,324
+Adjusted R-squared	0.21	0.11	0.12	0.12	0.33	0.08
+Interaction: T1 sig.	0.000	0.000	0.000	0.000	0.000	0.194
+Interaction: T2 sig.	0.000	0.000	0.000	0.000	0.000	0.266
+Robust standard errors in parentheses						
+*** p<0.01, ** p<0.05, * p<0.1						

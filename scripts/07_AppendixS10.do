@@ -127,12 +127,12 @@ cibar vaccinated, over(treatment)   graphopts(graphregion(fcolor(none)) yline(.4
 graph save "$working_ANALYSIS/results/intermediate/FigureS10_b", replace
 
 
-graph combine "$working_ANALYSIS/results/intermediate/FigureS9_a" "$working_ANALYSIS/results/intermediate/FigureS9_b", row(1) xsize(7.5)
+graph combine "$working_ANALYSIS/results/intermediate/FigureS10_a" "$working_ANALYSIS/results/intermediate/FigureS10_b", row(1) xsize(7.5)
 gr_edit .plotregion1.graph1.legend.xoffset = 4
 gr_edit .plotregion1.graph1.yoffset = -1
 gr_edit .plotregion1.graph1.title.yoffset = 1
-gr save "$working_ANALYSIS/results/intermediate/FigureS10_external_validity.gph", replace
-gr export "$working_ANALYSIS/results/figures/FigureS10_external_validity.tif", replace width(4500)
+gr save "$working_ANALYSIS/results/intermediate/figureS10_external_validity.gph", replace
+gr export "$working_ANALYSIS/results/figures/figureS10_external_validity.tif", replace width(4500)
 
 
 

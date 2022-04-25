@@ -285,8 +285,8 @@ gr_edit .plotregion1.textbox1.xoffset = -0.5
 gr_edit .plotregion1.textbox2.xoffset = -0.5
 gr_edit .plotregion1.textbox3.xoffset = -0.5
 gr_edit .plotregion1.textbox4.xoffset = -0.5
-gr save "$working_ANALYSIS/results/intermediate/FigureS2_differential_attrition_rates.gph", replace
-gr export "$working_ANALYSIS/results/figures/FigureS2_differential_attrition_rates.tif", replace width(3165)
+gr save "$working_ANALYSIS/results/intermediate/figureS2_differential_attrition_rates.gph", replace
+gr export "$working_ANALYSIS/results/figures/figureS2_differential_attrition_rates.tif", replace width(3165)
 * ttests
 reg particip_w2 i.treatment if wave==1
 
@@ -549,8 +549,8 @@ gr_edit .plotregion1.graph2.xaxis1.style.editstyle majorstyle(tickstyle(textstyl
 gr_edit .plotregion1.graph2.xaxis1.title.style.editstyle size(vsmall) editcopy
 gr_edit .legend.Edit, style(labelstyle(size(vsmall))) style(labelstyle(color(custom)))
 gr_edit .legend.Edit , style(key_gap(tiny)) keepstyles 
-gr save "$working_ANALYSIS/results/intermediate/FigureS7_effects_5C.gph", replace
-gr export "$working_ANALYSIS/results/figures/FigureS7_effects_5C.tif", replace width(4500)
+gr save "$working_ANALYSIS/results/intermediate/figureS7_effects_5C.gph", replace
+gr export "$working_ANALYSIS/results/figures/figureS7_effects_5C.tif", replace width(4500)
 
 
 
@@ -700,7 +700,7 @@ gr_edit .plotregion1.textbox2.xoffset = -0.5
 gr_edit .plotregion1.textbox3.xoffset = -0.5
 gr_edit .plotregion1.textbox4.xoffset = -0.5
 gr save  "$working_ANALYSIS/results/intermediate/FigS9_batchNr.gph", replace
-gr export "$working_ANALYSIS/results/figures/FigS9_batchNr.tif", replace width(4500)
+gr export "$working_ANALYSIS/results/figures/figureS9_batchNr.tif", replace width(4500)
 
 
 

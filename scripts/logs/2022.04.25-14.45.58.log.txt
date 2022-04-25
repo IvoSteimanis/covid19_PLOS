@@ -13510,3 +13510,34 @@ end of do-file
 
 r(601);
 
+. do "C:\Users\istei\AppData\Local\Temp\STD2b9c_000000.tmp"
+
+. 
+. graph combine "$working_ANALYSIS/results/intermediate/FigureS10_a" "$working_ANALYSIS/results/intermediate/FigureS10_b", row(1) xsize(7.5)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(note:  named style medthin not found in class linestyle, default attributes used)
+
+. gr_edit .plotregion1.graph1.legend.xoffset = 4
+
+. gr_edit .plotregion1.graph1.yoffset = -1
+
+. gr_edit .plotregion1.graph1.title.yoffset = 1
+
+. gr save "$working_ANALYSIS/results/intermediate/FigureS10_external_validity.gph", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediat
+> e/FigureS10_external_validity.gph not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediate/Figu
+> reS10_external_validity.gph saved)
+
+. gr export "$working_ANALYSIS/results/figures/FigureS10_external_validity.tif", replace width(4500)
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/figures/Fig
+> ureS10_external_validity.tif not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/figures/FigureS10
+> _external_validity.tif written in TIFF format)
+
+. 
+. 
+. 
+. 
+end of do-file
+

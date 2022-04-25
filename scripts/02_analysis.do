@@ -450,28 +450,6 @@ outreg2 using "$working_ANALYSIS/results/tables/TableS10_heterogeneous_intention
 
 
 
-*Table S11.	Treatment effects on 5C: Wave 1
-foreach x of varlist $five_c {
-	reg `x' w1_t2 w1_t3 $control if wave == 1, vce(hc3)
-	est store fiveC_`x'
-	testparm $control
-	local F1 = r(p)
-	outreg2 using "$working_ANALYSIS/results/tables/TableS11_5C_wave1", addstat("F-Test: Socio-economics", `F1') adec(3) word  adjr2 dec(2)
-}
-
-
-
-*Table S12.	Treatment effects on 5C: Wave 2
-sort respondi_id wave
-foreach x of varlist $five_c {
-	reg `x' t2 t3 t4 l.`x' $control  if wave == 2 & panel==1, vce(hc3)
-	est store fiveC2_`x'
-	testparm $control
-	local F1 = r(p)
-	outreg2 using "$working_ANALYSIS/results/tables/TableS12_5C_wave2", addstat("F-Test: Socio-economics", `F1') adec(3) word  adjr2 dec(2)
-}
-
-
 *Fig. S6.	mRNA vaccination intentions
 cibar intent_mrna if wave == 1, over1(priority) bargap(10) barlabel(on) blsize(small) blfmt(%9.2f) blpos(11) graphopts(legend(ring (1) pos(6) rows(2)) xla(, nogrid) yla(1(1)7, nogrid) title("{bf: A} Intention by priority group", pos(11) span)  ytitle("Average intention")) ciopts(lcolor(gs3) lpattern(dash))
 gr save "$working_ANALYSIS/results/intermediate/FigureS6_a.gph", replace
@@ -494,6 +472,47 @@ gr_edit .plotregion1.graph2.plotregion1.textbox5.xoffset = -0.5
 gr_edit .plotregion1.graph2.plotregion1.textbox6.xoffset = -0.5
 gr save "$working_ANALYSIS/results/intermediate/figureS6_priority.gph", replace
 gr export "$working_ANALYSIS/results/figures/figureS6_priority.tif", replace width(4500)
+
+
+
+* Table S11.	Treatment effects vaccination intentions: Only respondents without prioritization status
+reg intent_mrna w1_t2 w1_t3 if wave == 1 & priority == 0, vce(hc3)
+outreg2 using "$working_ANALYSIS/results/tables/TableS11_without_priority_groups", addstat("Adjusted R-squared", e(r2_a)) adec(3) drop() word ctitle("MRNA") dec(2) replace
+reg intent_mrna w1_t2 w1_t3 $control if wave == 1 & priority == 0, vce(hc3)
+testparm $control
+local F1 = r(p)
+outreg2 using "$working_ANALYSIS/results/tables/TableS11_without_priority_groups", addstat("Adjusted R-squared", e(r2_a), "Socio-economic", `F1') adec(3) word ctitle("MRNA") dec(2) append
+reg intent_mrna w1_t2 w1_t3 $control $x_2 if wave == 1 & priority == 0, vce(hc3)
+testparm $control
+local F1 = r(p)
+testparm $x_2
+local F2 = r(p)
+outreg2 using "$working_ANALYSIS/results/tables/TableS11_without_priority_groups", addstat("Adjusted R-squared", e(r2_a), "Socio-economic", `F1', "Reasons", `F2') adec(3) word ctitle("MRNA") dec(2) append
+
+
+
+*Table S12.	Treatment effects on 5C: Wave 1
+foreach x of varlist $five_c {
+	reg `x' w1_t2 w1_t3 $control if wave == 1, vce(hc3)
+	est store fiveC_`x'
+	testparm $control
+	local F1 = r(p)
+	outreg2 using "$working_ANALYSIS/results/tables/TableS12_5C_wave1", addstat("F-Test: Socio-economics", `F1') adec(3) word  adjr2 dec(2)
+}
+
+
+
+*Table S13.	Treatment effects on 5C: Wave 2
+sort respondi_id wave
+foreach x of varlist $five_c {
+	reg `x' t2 t3 t4 l.`x' $control  if wave == 2 & panel==1, vce(hc3)
+	est store fiveC2_`x'
+	testparm $control
+	local F1 = r(p)
+	outreg2 using "$working_ANALYSIS/results/tables/TableS13_5C_wave2", addstat("F-Test: Socio-economics", `F1') adec(3) word  adjr2 dec(2)
+}
+
+
 
 
 *Fig. S7.	Treatment effects on 5C
@@ -535,59 +554,59 @@ gr export "$working_ANALYSIS/results/figures/FigureS7_effects_5C.tif", replace w
 
 
 
-*Table S13.	Treatment effects vaccination intentions (without exclusion)
+*Table S14.	Treatment effects vaccination intentions (without exclusion)
 * created in extra do-file "03_robustness_checks_no_exclusion"
 
 
 
-*Table S14.	Treatment effects on inaction: Balanced Panel
+*Table S15.	Treatment effects on inaction: Balanced Panel
 reg no_action $treatments l_no_action , vce(robust)
-outreg2 using "$working_ANALYSIS/results/tables/TableS14_inaction_treatment_effects", drop($control) word  dec(2) replace
+outreg2 using "$working_ANALYSIS/results/tables/TableS15_inaction_treatment_effects", drop($control) word  dec(2) replace
 reg no_action $treatments l_no_action $control , vce(robust)
-outreg2 using "$working_ANALYSIS/results/tables/TableS14_inaction_treatment_effects", drop($control) word  dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS15_inaction_treatment_effects", drop($control) word  dec(2) append
 reg no_action $treatments l_no_action $control $x2_lagged, vce(robust)
-outreg2 using "$working_ANALYSIS/results/tables/TableS14_inaction_treatment_effects", drop($control $x2_lagged) word  dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS15_inaction_treatment_effects", drop($control $x2_lagged) word  dec(2) append
 *with interactions
 reg no_action $treatments l_no_action l_no_action_t2 l_no_action_t3 l_no_action_t4 , vce(robust)
-outreg2 using "$working_ANALYSIS/results/tables/TableS14_inaction_treatment_effects", drop($control) word  dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS15_inaction_treatment_effects", drop($control) word  dec(2) append
 reg no_action $treatments l_no_action l_no_action_t2 l_no_action_t3 l_no_action_t4 $control , vce(robust)
-outreg2 using "$working_ANALYSIS/results/tables/TableS14_inaction_treatment_effects", drop($control) word  dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS15_inaction_treatment_effects", drop($control) word  dec(2) append
 reg no_action $treatments l_no_action l_no_action_t2 l_no_action_t3 l_no_action_t4 $control $x2_lagged , vce(robust)
-outreg2 using "$working_ANALYSIS/results/tables/TableS14_inaction_treatment_effects", drop($control $x2_lagged) word  dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS15_inaction_treatment_effects", drop($control $x2_lagged) word  dec(2) append
 
 
 
-*Table S15.	Robustness check using non-linear Probit models and computing margins
+*Table S16.	Robustness check using non-linear Probit models and computing margins
 *Probit models and tests for interaction effects between treatment and baseline action
 probit no_action i.treatment l_no_action , vce(robust)
 margins, dydx(*) post
-outreg2 using "$working_ANALYSIS/results/tables/TableS15_inaction_treatment_effects_RC", drop($control) word  dec(2) replace
+outreg2 using "$working_ANALYSIS/results/tables/TableS16_inaction_treatment_effects_RC", drop($control) word  dec(2) replace
 probit no_action i.treatment l_no_action $control , vce(robust)
 margins, dydx(*) post
-outreg2 using  "$working_ANALYSIS/results/tables/TableS15_inaction_treatment_effects_RC", drop($control) word  dec(2) append
+outreg2 using  "$working_ANALYSIS/results/tables/TableS16_inaction_treatment_effects_RC", drop($control) word  dec(2) append
 probit no_action i.treatment l_no_action $control $x2_lagged, vce(robust)
 margins, dydx(*) post
-outreg2 using  "$working_ANALYSIS/results/tables/TableS15_inaction_treatment_effects_RC", drop($control $x2_lagged) word  dec(2) append
+outreg2 using  "$working_ANALYSIS/results/tables/TableS16_inaction_treatment_effects_RC", drop($control $x2_lagged) word  dec(2) append
 
 *predict interaction effects using margins contrast option
 probit no_action treatment##l_no_action , vce(robust)
 margins r.treatment#r.l_no_action, post
-outreg2 using  "$working_ANALYSIS/results/tables/TableS15_inaction_treatment_effects_RC", drop($control) word  dec(2) append
+outreg2 using  "$working_ANALYSIS/results/tables/TableS16_inaction_treatment_effects_RC", drop($control) word  dec(2) append
 probit no_action treatment##l_no_action $control, vce(robust)
 margins r.treatment##r.l_no_action, post
-outreg2 using  "$working_ANALYSIS/results/tables/TableS15_inaction_treatment_effects_RC", drop($control) word  dec(2) append
+outreg2 using  "$working_ANALYSIS/results/tables/TableS16_inaction_treatment_effects_RC", drop($control) word  dec(2) append
 probit no_action treatment##l_no_action $control $x2_lagged, vce(robust)
 margins r.treatment##r.l_no_action, post
-outreg2 using  "$working_ANALYSIS/results/tables/TableS15_inaction_treatment_effects_RC", drop($control) word  dec(2) append
+outreg2 using  "$working_ANALYSIS/results/tables/TableS16_inaction_treatment_effects_RC", drop($control) word  dec(2) append
 
 
 
-*Table S16.	Robustness check linear model without exclusion criteria
+*Table S17.	Robustness check linear model without exclusion criteria
 * created in extra do-file "03_robustness_checks_no_exclusion"
 
 
 
-*Table S17.	Heterogeneous treatment effects as pre-registered
+*Table S18.	Heterogeneous treatment effects as pre-registered
 foreach var of global heterogeneous_PAP_lagged {
 reg no_action $treatments `var' `var'_t2 `var'_t3 `var'_t4 $control, rob
 testparm `var'_t2 `var' t2
@@ -596,7 +615,7 @@ testparm `var'_t3 `var' t3
 local F2 = r(p)
 testparm `var'_t4 `var' t4
 local F3 = r(p)
-outreg2 using "$working_ANALYSIS/results/tables/TableS17_vaccine_hesitancy_heterogeneous", drop($control) addstat("Interaction: T1 sig.", `F1', "Interaction: T2 sig.", `F2', "Interaction: T3 sig.", `F3') adec(2) word  adjr2 dec(2)
+outreg2 using "$working_ANALYSIS/results/tables/TableS18_vaccine_hesitancy_heterogeneous", drop($control) addstat("Interaction: T1 sig.", `F1', "Interaction: T2 sig.", `F2', "Interaction: T3 sig.", `F3') adec(2) word  adjr2 dec(2)
 }
 
 
@@ -642,17 +661,17 @@ gr export "$working_ANALYSIS/results/figures/figureS8_benefits_splits.tif", repl
 
 
 
-*Table S18.	Determinants of inaction in wave 2
+*Table S19.	Determinants of inaction in wave 2
 reg no_action $treatments if l_no_action & wave==2, vce(hc3)
 testparm $treatments
 local F0 = r(p)
-outreg2 using "$working_ANALYSIS/results/tables/TableS18_determinants_inaction", drop()  addstat("Adjusted R-squared", e(r2_a), "F-Test:Treatments", `F0') adec(3) dec(2) word  replace
+outreg2 using "$working_ANALYSIS/results/tables/TableS19_determinants_inaction", drop()  addstat("Adjusted R-squared", e(r2_a), "F-Test:Treatments", `F0') adec(3) dec(2) word  replace
 reg no_action  $treatments $control if l_no_action & wave==2, vce(hc3)
 testparm $treatments
 local F0 = r(p)
 testparm $control
 local F1 = r(p)
-outreg2 using "$working_ANALYSIS/results/tables/TableS18_determinants_inaction", drop()  addstat("Adjusted R-squared", e(r2_a), "F-Test:Treatments", `F0', "F-Test: Socio-economics", `F1') adec(3) dec(2) word  append
+outreg2 using "$working_ANALYSIS/results/tables/TableS19_determinants_inaction", drop()  addstat("Adjusted R-squared", e(r2_a), "F-Test:Treatments", `F0', "F-Test: Socio-economics", `F1') adec(3) dec(2) word  append
 reg no_action $treatments $control $five_c_lagged if l_no_action & wave==2, vce(hc3)
 testparm $treatments
 local F0 = r(p)
@@ -660,7 +679,7 @@ testparm $control
 local F1 = r(p)
 testparm $five_c_lagged
 local F2 = r(p)
-outreg2 using "$working_ANALYSIS/results/tables/TableS18_determinants_inaction", drop()  addstat("Adjusted R-squared", e(r2_a), "F-Test:Treatments", `F0', "F-Test: Socio-economics", `F1',  "F-Test: 5C", `F2') adec(3) dec(2) word  append
+outreg2 using "$working_ANALYSIS/results/tables/TableS19_determinants_inaction", drop()  addstat("Adjusted R-squared", e(r2_a), "F-Test:Treatments", `F0', "F-Test: Socio-economics", `F1',  "F-Test: 5C", `F2') adec(3) dec(2) word  append
 reg no_action $treatments  $control  $five_c_lagged $x_2_lagged if l_no_action & wave==2, vce(hc3)
 testparm $treatments
 local F0 = r(p)
@@ -670,7 +689,7 @@ testparm $five_c_lagged
 local F2 = r(p)
 testparm $x_2_lagged
 local F3 = r(p)
-outreg2 using "$working_ANALYSIS/results/tables/TableS18_determinants_inaction", drop()  addstat("Adjusted R-squared", e(r2_a), "F-Test:Treatments", `F0', "F-Test: Socio-economics", `F1',  "F-Test: 5C", `F2', "F-Test: Reasons", `F3') adec(3) dec(2) word  append
+outreg2 using "$working_ANALYSIS/results/tables/TableS19_determinants_inaction", drop()  addstat("Adjusted R-squared", e(r2_a), "F-Test:Treatments", `F0', "F-Test: Socio-economics", `F1',  "F-Test: 5C", `F2', "F-Test: Reasons", `F3') adec(3) dec(2) word  append
 
 
 

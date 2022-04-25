@@ -33,38 +33,38 @@ global heterogeneous_PAP_lagged l_no_action l_denied_vaccine_past z_l_c19_risk_i
 iebaltab $selective_exclusion if wave == 1, grpvar(excluded2) rowvarlabels save("$working_ANALYSIS/results/tables/TableS2_excluded_vs_nonexcluded") replace 
 
 
-*Table S13.	Treatment effects vaccination intentions (without exclusion)
+*Table S14.	Treatment effects vaccination intentions (without exclusion)
 *MRNA
 reg intent_mrna w1_t2 w1_t3 if wave == 1, vce(hc3)
-outreg2 using "$working_ANALYSIS/results/tables/TableS13_vaccination_intentions_RC", addstat("Adjusted R-squared", e(r2_a)) adec(3) drop() word ctitle("MRNA") dec(2) replace
+outreg2 using "$working_ANALYSIS/results/tables/TableS14_vaccination_intentions_RC", addstat("Adjusted R-squared", e(r2_a)) adec(3) drop() word ctitle("MRNA") dec(2) replace
 reg intent_mrna w1_t2 w1_t3 $control if wave == 1, vce(hc3)
 testparm $control
 local F1 = r(p)
-outreg2 using "$working_ANALYSIS/results/tables/TableS13_vaccination_intentions_RC", addstat("Adjusted R-squared", e(r2_a), "Socio-economic", `F1') adec(3) word ctitle("MRNA") dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS14_vaccination_intentions_RC", addstat("Adjusted R-squared", e(r2_a), "Socio-economic", `F1') adec(3) word ctitle("MRNA") dec(2) append
 reg intent_mrna w1_t2 w1_t3 $control $x_2 if wave == 1, vce(hc3)
 testparm $control
 local F1 = r(p)
 testparm $x_2
 local F2 = r(p)
-outreg2 using "$working_ANALYSIS/results/tables/TableS13_vaccination_intentions_RC", addstat("Adjusted R-squared", e(r2_a), "Socio-economic", `F1', "Reasons", `F2') adec(3) word ctitle("MRNA") dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS14_vaccination_intentions_RC", addstat("Adjusted R-squared", e(r2_a), "Socio-economic", `F1', "Reasons", `F2') adec(3) word ctitle("MRNA") dec(2) append
 
 *VECTOR
 reg intent_vector w1_t2 w1_t3 if wave == 1, vce(hc3)
-outreg2 using "$working_ANALYSIS/results/tables/TableS13_vaccination_intentions_RC", addstat("Adjusted R-squared", e(r2_a)) adec(3) drop() word ctitle("Vector") dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS14_vaccination_intentions_RC", addstat("Adjusted R-squared", e(r2_a)) adec(3) drop() word ctitle("Vector") dec(2) append
 reg intent_vector w1_t2 w1_t3 $control if wave == 1, vce(hc3)
 testparm $control
 local F1 = r(p)
-outreg2 using "$working_ANALYSIS/results/tables/TableS13_vaccination_intentions_RC", addstat("Adjusted R-squared", e(r2_a), "Socio-economic", `F1') adec(3) word ctitle("Vector") dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS14_vaccination_intentions_RC", addstat("Adjusted R-squared", e(r2_a), "Socio-economic", `F1') adec(3) word ctitle("Vector") dec(2) append
 reg intent_vector w1_t2 w1_t3 $control $x_2 if wave == 1, vce(hc3)
 est store intent_vector
 testparm $control
 local F1 = r(p)
 testparm $x_2
 local F2 = r(p)
-outreg2 using "$working_ANALYSIS/results/tables/TableS13_vaccination_intentions_RC", addstat("Adjusted R-squared", e(r2_a), "Socio-economic", `F1', "Reasons", `F2') adec(3) word ctitle("Vector") dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS14_vaccination_intentions_RC", addstat("Adjusted R-squared", e(r2_a), "Socio-economic", `F1', "Reasons", `F2') adec(3) word ctitle("Vector") dec(2) append
 
 
-*Table S16.	Robustness check linear model without exclusion criteria
+*Table S17.	Robustness check linear model without exclusion criteria
 foreach i of global heterogeneous_PAP_lagged  {
 	foreach j of global treatments {
 		gen `i'_`j' = `i'*`j'
@@ -72,18 +72,18 @@ foreach i of global heterogeneous_PAP_lagged  {
 }
 
 reg no_action $treatments l_no_action , vce(robust)
-outreg2 using "$working_ANALYSIS/results/tables/TableS16_inaction_treatment_effects_RC", drop($control) word  dec(2) replace
+outreg2 using "$working_ANALYSIS/results/tables/TableS17_inaction_treatment_effects_RC", drop($control) word  dec(2) replace
 reg no_action $treatments l_no_action $control , vce(robust)
-outreg2 using "$working_ANALYSIS/results/tables/TableS16_inaction_treatment_effects_RC", drop($control) word  dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS17_inaction_treatment_effects_RC", drop($control) word  dec(2) append
 reg no_action $treatments l_no_action $control $x2_lagged, vce(robust)
-outreg2 using "$working_ANALYSIS/results/tables/TableS16_inaction_treatment_effects_RC", drop($control $x2_lagged) word  dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS17_inaction_treatment_effects_RC", drop($control $x2_lagged) word  dec(2) append
 *with interactions
 reg no_action $treatments l_no_action l_no_action_t2 l_no_action_t3 l_no_action_t4 , vce(robust)
-outreg2 using "$working_ANALYSIS/results/tables/TableS16_inaction_treatment_effects_RC", drop($control) word  dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS17_inaction_treatment_effects_RC", drop($control) word  dec(2) append
 reg no_action $treatments l_no_action l_no_action_t2 l_no_action_t3 l_no_action_t4 $control , vce(robust)
-outreg2 using "$working_ANALYSIS/results/tables/TableS16_inaction_treatment_effects_RC", drop($control) word  dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS17_inaction_treatment_effects_RC", drop($control) word  dec(2) append
 reg no_action $treatments l_no_action l_no_action_t2 l_no_action_t3 l_no_action_t4 $control $x2_lagged , vce(robust)
-outreg2 using "$working_ANALYSIS/results/tables/TableS16_inaction_treatment_effects_RC", drop($control $x2_lagged) word  dec(2) append
+outreg2 using "$working_ANALYSIS/results/tables/TableS17_inaction_treatment_effects_RC", drop($control $x2_lagged) word  dec(2) append
 
 
 

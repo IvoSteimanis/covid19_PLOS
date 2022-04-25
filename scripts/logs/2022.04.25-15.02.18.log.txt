@@ -10531,3 +10531,1943 @@ file germany_vac_share_AGS.dta saved
 . 
 . use germany_vac_share_AGS, clear
 
+. spmap unvac_share using germany_AGS_shp, id(objectid) fcolor(BuYlRd) ocolor(white ..) osize(0pt ..) clmethod(custom) clbreaks(0(0.1)0.95)  legstyle(
+> 2) title("{bf:B  }Unvaccinated rate in Germany on June 2, 2021", size(10pt) pos(11) span)
+
+. gr_edit .legend.Edit, style(labelstyle(size(8-pt)))
+
+. gr_edit .legend.yoffset = -1
+
+. graph save "$working_ANALYSIS/results/intermediate/figure2_map_b.gph", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediat
+> e/figure2_map_b.gph not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediate/figu
+> re2_map_b.gph saved)
+
+. 
+. 
+. 
+. // Combine both maps
+. graph combine "$working_ANALYSIS/results/intermediate/figure2_map_a.gph" "$working_ANALYSIS/results/intermediate/figure2_map_b.gph", row(1)
+
+. gr_edit .plotregion1.graph2.legend.yoffset = -3
+
+. gr_edit .plotregion1.graph1.legend.yoffset = -3
+
+. gr_edit .plotregion1.graph1.legend.xoffset = -1
+
+. gr_edit .plotregion1.graph2.legend.xoffset = -1
+
+. gr_edit .plotregion1.graph2.plotregion1.AddTextBox added_text editor 5975445.3592471 952490.6959761244
+
+. gr_edit .plotregion1.graph2.plotregion1.added_text_new = 1
+
+. gr_edit .plotregion1.graph2.plotregion1.added_text_rec = 1
+
+. gr_edit .plotregion1.graph2.plotregion1.added_text[1].style.editstyle  angle(default) size( sztype(relative) val(3.4722) allow_pct(1)) color(black) 
+> horizontal(left) vertical(middle) margin( gleft( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztype(re
+> lative) val(0) allow_pct(1)) gbottom( sztype(relative) val(0) allow_pct(1))) linegap( sztype(relative) val(0) allow_pct(1)) drawbox(no) boxmargin( g
+> left( sztype(relative) val(0) allow_pct(1)) gright( sztype(relative) val(0) allow_pct(1)) gtop( sztype(relative) val(0) allow_pct(1)) gbottom( sztyp
+> e(relative) val(0) allow_pct(1))) fillcolor(bluishgray) linestyle( width( sztype(relative) val(.2) allow_pct(1)) color(black) pattern(solid) align(i
+> nside)) box_alignment(east) editcopy
+
+. gr_edit .plotregion1.graph2.plotregion1.added_text[1].style.editstyle size(6-pt) editcopy
+
+. gr_edit .plotregion1.graph2.plotregion1.added_text[1].text = {}
+
+. gr_edit .plotregion1.graph2.plotregion1.added_text[1].text.Arrpush © OpenStreetMap contributors
+
+. gr_edit .plotregion1.graph2.plotregion1.added_text[1].DragBy -16371.28371776983 464535.1813884209
+
+. gr save "$working_ANALYSIS/results/intermediate/figure2_map.gph", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediat
+> e/figure2_map.gph not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediate/figu
+> re2_map.gph saved)
+
+. gr export "$working_ANALYSIS/results/figures/figure2_map.tif", replace width(4500)
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/figures/fig
+> ure2_map.tif not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/figures/figure2_m
+> ap.tif written in TIFF format)
+
+. 
+. 
+. 
+. 
+. 
+. ** EOF
+. 
+end of do-file
+
+. do "$working_ANALYSIS/scripts/05_figureS1_dogmatism_scale.do"
+
+. *--------------------------------------------------------------------
+. * SCRIPT: 05_figureS1_dogmatism_scale.do
+. * PURPOSE: replicates Figure S1 - construction of the dogmatism scale
+. *--------------------------------------------------------------------
+. *Load dogmatism data from pretest
+. use "$working_ANALYSIS/data/pre-test_corona_raw.dta", clear
+(pre-test-corona-2021)
+
+. 
+. *PCA
+. pca dt06_01 dt06_02 dt06_03 dt06_04 dt06_05 dt06_06 dt06_07 dt06_08 dt06_09 dt06_10 dt06_11 dt06_12 dt06_13 dt06_14 dt06_15 dt06_16 dt06_17 dt06_18,
+>  blanks(0.15) comp(3) //dt06_18 loads in the opposite direction of what it should -> exlude it
+
+Principal components/correlation                 Number of obs    =        480
+                                                 Number of comp.  =          3
+                                                 Trace            =         18
+    Rotation: (unrotated = principal)            Rho              =     0.4451
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |      4.39676      2.44766             0.2443       0.2443
+           Comp2 |       1.9491      .283825             0.1083       0.3525
+           Comp3 |      1.66527       .34608             0.0925       0.4451
+           Comp4 |      1.31919      .342168             0.0733       0.5184
+           Comp5 |      .977024      .134502             0.0543       0.5726
+           Comp6 |      .842522     .0277673             0.0468       0.6194
+           Comp7 |      .814755     .0546579             0.0453       0.6647
+           Comp8 |      .760097      .069712             0.0422       0.7069
+           Comp9 |      .690385     .0336589             0.0384       0.7453
+          Comp10 |      .656726     .0200816             0.0365       0.7818
+          Comp11 |      .636645     .0750326             0.0354       0.8171
+          Comp12 |      .561612     .0264375             0.0312       0.8483
+          Comp13 |      .535175     .0319234             0.0297       0.8781
+          Comp14 |      .503251    .00417807             0.0280       0.9060
+          Comp15 |      .499073     .0677337             0.0277       0.9338
+          Comp16 |      .431339     .0284111             0.0240       0.9577
+          Comp17 |      .402928     .0447838             0.0224       0.9801
+          Comp18 |      .358145            .             0.0199       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors)  (blanks are abs(loading)<.15)
+
+    ----------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3 | Unexplained 
+    -------------+------------------------------+-------------
+         dt06_01 |   0.1775    0.3005           |       .6854 
+         dt06_02 |  -0.1571    0.1731           |       .8135 
+         dt06_03 |   0.3033    0.2409           |       .4823 
+         dt06_04 |             0.2610    0.2859 |       .6809 
+         dt06_05 |  -0.1849    0.2842   -0.2170 |       .6138 
+         dt06_06 |   0.2819    0.3248           |       .4414 
+         dt06_07 |  -0.2118    0.3552   -0.2293 |       .4694 
+         dt06_08 |   0.2996    0.3093           |       .3986 
+         dt06_09 |   0.2546                     |       .6673 
+         dt06_10 |  -0.2402    0.1638           |       .6779 
+         dt06_11 |  -0.1660    0.3172           |       .6715 
+         dt06_12 |   0.3070    0.1940           |       .4839 
+         dt06_13 |   0.3386                     |       .4615 
+         dt06_14 |   0.1718              0.5553 |       .3557 
+         dt06_15 |  -0.2678    0.1712    0.2277 |       .5412 
+         dt06_16 |   0.2210              0.4334 |       .4489 
+         dt06_17 |  -0.1984    0.3260           |       .5982 
+         dt06_18 |  -0.2092              0.4190 |       .4975 
+    ----------------------------------------------------------
+
+. 
+. *First iteration
+. pca dt06_01 dt06_02 dt06_03 dt06_04 dt06_05 dt06_06 dt06_07 dt06_08 dt06_09 dt06_10 dt06_11 dt06_12 dt06_13 dt06_14 dt06_15 dt06_16 dt06_17 , blanks
+> (0.2) comp(1)
+
+Principal components/correlation                 Number of obs    =        480
+                                                 Number of comp.  =          1
+                                                 Trace            =         17
+    Rotation: (unrotated = principal)            Rho              =     0.2497
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |      4.24465      2.30294             0.2497       0.2497
+           Comp2 |      1.94172      .444165             0.1142       0.3639
+           Comp3 |      1.49755      .210325             0.0881       0.4520
+           Comp4 |      1.28723      .424252             0.0757       0.5277
+           Comp5 |      .862976     .0205499             0.0508       0.5785
+           Comp6 |      .842427     .0313942             0.0496       0.6280
+           Comp7 |      .811032      .103272             0.0477       0.6757
+           Comp8 |       .70776     .0233795             0.0416       0.7174
+           Comp9 |      .684381     .0277818             0.0403       0.7576
+          Comp10 |      .656599     .0311992             0.0386       0.7963
+          Comp11 |        .6254     .0651084             0.0368       0.8330
+          Comp12 |      .560291     .0381366             0.0330       0.8660
+          Comp13 |      .522155     .0203154             0.0307       0.8967
+          Comp14 |      .501839     .0172479             0.0295       0.9262
+          Comp15 |      .484591      .081171             0.0285       0.9547
+          Comp16 |      .403421     .0374485             0.0237       0.9785
+          Comp17 |      .365972            .             0.0215       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors)  (blanks are abs(loading)<.2)
+
+    --------------------------------------
+        Variable |    Comp1 | Unexplained 
+    -------------+----------+-------------
+         dt06_01 |          |       .8433 
+         dt06_02 |          |       .8952 
+         dt06_03 |   0.3118 |       .5875 
+         dt06_04 |          |       .9553 
+         dt06_05 |          |       .8462 
+         dt06_06 |   0.2879 |       .6481 
+         dt06_07 |  -0.2205 |       .7936 
+         dt06_08 |   0.3058 |       .6031 
+         dt06_09 |   0.2670 |       .6975 
+         dt06_10 |  -0.2392 |       .7572 
+         dt06_11 |          |       .8826 
+         dt06_12 |   0.3073 |       .5991 
+         dt06_13 |   0.3472 |       .4882 
+         dt06_14 |          |       .8391 
+         dt06_15 |  -0.2573 |        .719 
+         dt06_16 |   0.2362 |       .7633 
+         dt06_17 |          |       .8371 
+    --------------------------------------
+
+. matrix list e(L)
+
+e(L)[17,1]
+              Comp1
+dt06_01   .19211705
+dt06_02  -.15710494
+dt06_03   .31175348
+dt06_04  -.10265834
+dt06_05  -.19037083
+dt06_06   .28793134
+dt06_07   -.2205178
+dt06_08    .3057879
+dt06_09   .26696984
+dt06_10  -.23917349
+dt06_11   -.1662883
+dt06_12   .30731653
+dt06_13   .34724715
+dt06_14   .19470919
+dt06_15  -.25728402
+dt06_16   .23615773
+dt06_17  -.19588355
+
+. matrix define loadings = e(L)
+
+. 
+. preserve
+
+. xsvmat double loadings, names(col) rownames(var) saving("$working_ANALYSIS/processed/dog_pca_pre-test", replace)
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/dog_pca_p
+> re-test.dta not found)
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/dog_pca_pre-test
+> .dta saved
+
+. use "$working_ANALYSIS/processed/dog_pca_pre-test", clear
+
+. gen dropped = 1
+
+. replace dropped = 0 if Comp1 <= -.19 | Comp1 >= 0.19
+(14 real changes made)
+
+. encode var, gen(var_nr)
+
+. save "$working_ANALYSIS/processed/dog_pca_pre-test", replace
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/dog_pca_pre-test
+> .dta saved
+
+. 
+. twoway (dropline Comp1 var_nr if dropped == 0, horizontal mlabel(Comp1) mlabformat(%12.2f) mlabposition(top)) (dropline Comp1 var_nr if dropped == 1
+> , horizontal mlabel(Comp1)  mlabformat(%12.2f) mlabposition(top)  ), ylabel(1(1)17, valuelabel) xtitle(loadings) legend(order(1 "Preserved" 2 "Exclu
+> ded") rows(1))ytitle("") title("{bf:A } First iteration", pos(11) span)
+
+. graph save "$working_ANALYSIS/results/intermediate/dog_loadings1", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediat
+> e/dog_loadings1.gph not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediate/dog_
+> loadings1.gph saved)
+
+. restore
+
+. 
+. *Second iteration
+. pca dt06_01 dt06_03 dt06_05 dt06_06 dt06_07 dt06_08 dt06_09 dt06_10 dt06_12 dt06_13 dt06_15 dt06_16, blanks(0.2) comp(1) //drop 5 & 7
+
+Principal components/correlation                 Number of obs    =        480
+                                                 Number of comp.  =          1
+                                                 Trace            =         12
+    Rotation: (unrotated = principal)            Rho              =     0.3181
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |      3.81761      2.21414             0.3181       0.3181
+           Comp2 |      1.60347      .521462             0.1336       0.4518
+           Comp3 |      1.08201      .190838             0.0902       0.5419
+           Comp4 |      .891171       .12181             0.0743       0.6162
+           Comp5 |      .769361     .0614936             0.0641       0.6803
+           Comp6 |      .707868     .0866764             0.0590       0.7393
+           Comp7 |      .621191     .0116517             0.0518       0.7911
+           Comp8 |       .60954     .0446461             0.0508       0.8419
+           Comp9 |      .564893     .0240962             0.0471       0.8889
+          Comp10 |      .540797      .126338             0.0451       0.9340
+          Comp11 |       .41446     .0368353             0.0345       0.9685
+          Comp12 |      .377624            .             0.0315       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors)  (blanks are abs(loading)<.2)
+
+    --------------------------------------
+        Variable |    Comp1 | Unexplained 
+    -------------+----------+-------------
+         dt06_01 |   0.2230 |       .8101 
+         dt06_03 |   0.3486 |        .536 
+         dt06_05 |          |       .8877 
+         dt06_06 |   0.3389 |       .5615 
+         dt06_07 |          |       .8621 
+         dt06_08 |   0.3512 |       .5291 
+         dt06_09 |   0.2945 |       .6689 
+         dt06_10 |  -0.2391 |       .7818 
+         dt06_12 |   0.3471 |       .5401 
+         dt06_13 |   0.3793 |       .4507 
+         dt06_15 |  -0.2571 |       .7476 
+         dt06_16 |   0.2248 |        .807 
+    --------------------------------------
+
+. matrix list e(L)
+
+e(L)[12,1]
+              Comp1
+dt06_01   .22304367
+dt06_03   .34861493
+dt06_05   -.1715136
+dt06_06   .33891646
+dt06_07   -.1900804
+dt06_08   .35122582
+dt06_09   .29451063
+dt06_10  -.23909986
+dt06_12     .347086
+dt06_13   .37933574
+dt06_15  -.25714933
+dt06_16   .22483863
+
+. matrix define loadings = e(L)
+
+. 
+. preserve
+
+. xsvmat double loadings, names(col) rownames(var) saving("$working_ANALYSIS/processed/dog_pca_pre-test2", replace)
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/dog_pca_p
+> re-test2.dta not found)
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/dog_pca_pre-test
+> 2.dta saved
+
+. use "$working_ANALYSIS/processed/dog_pca_pre-test2", clear
+
+. gen dropped = 1
+
+. replace dropped = 0 if Comp1 <= -.20 | Comp1 >= 0.20
+(10 real changes made)
+
+. save "$working_ANALYSIS/processed/dog_pca_pre-test2", replace
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/dog_pca_pre-test
+> 2.dta saved
+
+. 
+. use "$working_ANALYSIS/processed/dog_pca_pre-test", clear
+
+. keep var var_nr
+
+. merge 1:1 var using "$working_ANALYSIS/processed/dog_pca_pre-test2"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             5
+        from master                         5  (_merge==1)
+        from using                          0  (_merge==2)
+
+    matched                                12  (_merge==3)
+    -----------------------------------------
+
+. 
+. twoway (dropline Comp1 var_nr if dropped == 0, horizontal mlabel(Comp1) mlabformat(%12.2f) mlabposition(top)) (dropline Comp1 var_nr if dropped == 1
+> , horizontal mlabel(Comp1)  mlabformat(%12.2f) mlabposition(top)  ), ylabel(1(1)17, valuelabel) xtitle(loadings) ytitle("") title("{bf:B } Second it
+> eration", pos(11) span)
+
+. graph save "$working_ANALYSIS/results/intermediate/dog_loadings2", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediat
+> e/dog_loadings2.gph not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediate/dog_
+> loadings2.gph saved)
+
+. restore
+
+. 
+. 
+. *final 
+. pca dt06_01 dt06_03 dt06_06 dt06_08 dt06_09 dt06_10 dt06_12 dt06_13 dt06_15 dt06_16, blanks(0.2) comp(1)
+
+Principal components/correlation                 Number of obs    =        480
+                                                 Number of comp.  =          1
+                                                 Trace            =         10
+    Rotation: (unrotated = principal)            Rho              =     0.3654
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |      3.65381      2.38598             0.3654       0.3654
+           Comp2 |      1.26783      .351438             0.1268       0.4922
+           Comp3 |      .916394      .122351             0.0916       0.5838
+           Comp4 |      .794042     .0451227             0.0794       0.6632
+           Comp5 |       .74892      .105321             0.0749       0.7381
+           Comp6 |      .643599     .0256288             0.0644       0.8025
+           Comp7 |       .61797     .0731495             0.0618       0.8643
+           Comp8 |       .54482      .120423             0.0545       0.9187
+           Comp9 |      .424398     .0361816             0.0424       0.9612
+          Comp10 |      .388216            .             0.0388       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors)  (blanks are abs(loading)<.2)
+
+    --------------------------------------
+        Variable |    Comp1 | Unexplained 
+    -------------+----------+-------------
+         dt06_01 |   0.2415 |       .7869 
+         dt06_03 |   0.3663 |       .5098 
+         dt06_06 |   0.3577 |       .5325 
+         dt06_08 |   0.3766 |       .4818 
+         dt06_09 |   0.3048 |       .6606 
+         dt06_10 |  -0.2350 |       .7982 
+         dt06_12 |   0.3674 |       .5068 
+         dt06_13 |   0.3857 |       .4566 
+         dt06_15 |  -0.2517 |       .7686 
+         dt06_16 |   0.2064 |       .8444 
+    --------------------------------------
+
+. matrix list e(L)
+
+e(L)[10,1]
+              Comp1
+dt06_01   .24147865
+dt06_03   .36628927
+dt06_06   .35770033
+dt06_08    .3765949
+dt06_09   .30476303
+dt06_10  -.23502118
+dt06_12   .36739103
+dt06_13   .38565709
+dt06_15  -.25165725
+dt06_16   .20637974
+
+. matrix define loadings = e(L)
+
+. 
+. preserve
+
+. xsvmat double loadings, names(col) rownames(var) saving("$working_ANALYSIS/processed/dog_pca_pre-test3", replace)
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/dog_pca_p
+> re-test3.dta not found)
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/dog_pca_pre-test
+> 3.dta saved
+
+. use "$working_ANALYSIS/processed/dog_pca_pre-test3", clear
+
+. gen dropped = 1
+
+. replace dropped = 0 if Comp1 <= -.20 | Comp1 >= 0.20
+(10 real changes made)
+
+. save "$working_ANALYSIS/processed/dog_pca_pre-test3", replace
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/dog_pca_pre-test
+> 3.dta saved
+
+. 
+. use "$working_ANALYSIS/processed/dog_pca_pre-test", clear
+
+. keep var var_nr
+
+. merge 1:1 var using "$working_ANALYSIS/processed/dog_pca_pre-test3"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             7
+        from master                         7  (_merge==1)
+        from using                          0  (_merge==2)
+
+    matched                                10  (_merge==3)
+    -----------------------------------------
+
+. 
+. twoway (dropline Comp1 var_nr if dropped == 0, horizontal mlabel(Comp1) mlabformat(%12.2f) mlabposition(top)) (dropline Comp1 var_nr if dropped == 1
+> , horizontal mlabel(Comp1)  mlabformat(%12.2f) mlabposition(top)  ), ylabel(1(1)17, valuelabel) xtitle(loadings) ytitle("") title("{bf:C } Final set
+> ", pos(11) span)
+
+. graph save "$working_ANALYSIS/results/intermediate/dog_loadings3", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediat
+> e/dog_loadings3.gph not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediate/dog_
+> loadings3.gph saved)
+
+. restore
+
+. 
+. grc1leg  "$working_ANALYSIS/results/intermediate/dog_loadings1" "$working_ANALYSIS/results/intermediate/dog_loadings2" "$working_ANALYSIS/results/in
+> termediate/dog_loadings3", rows(1) xsize(7.5)
+
+. gr_edit .legend.Edit, style(labelstyle(size(vsmall))) style(labelstyle(color(custom)))
+(note:  named style custom not found in class color, default attributes used)
+
+. gr_edit .plotregion1.graph1.plotregion1.plot2.style.editstyle area(linestyle(color("220 38 127"))) editcopy
+
+. gr_edit .plotregion1.graph2.plotregion1.plot2.style.editstyle area(linestyle(color("220 38 127"))) editcopy
+
+. gr_edit .legend.plotregion1.key[2].view.style.editstyle area(linestyle(color("220 38 127"))) editcopy
+
+. gr_edit .legend.plotregion1.key[2].view.style.editstyle marker(fillcolor("220 38 127")) editcopy
+
+. gr_edit .plotregion1.graph1.plotregion1.plot2.style.editstyle marker(fillcolor("220 38 127")) editcopy
+
+. gr_edit .plotregion1.graph2.plotregion1.plot2.style.editstyle marker(fillcolor("220 38 127")) editcopy
+
+. gr export "$working_ANALYSIS/results/figures/figureS1_dogmatism.tif", replace width(4500)
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/figures/fig
+> ureS1_dogmatism.tif not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/figures/figureS1_
+> dogmatism.tif written in TIFF format)
+
+. 
+. 
+. 
+. 
+. 
+. ** EOF
+. 
+end of do-file
+
+. do "$working_ANALYSIS/scripts/06_AppendixS7.do"
+
+. *--------------------------------------------------------------------------
+. * SCRIPT: 06_AppendixS7.do
+. * PURPOSE:      1) Prepare Datasets
+. *                               o Data from Microcensus
+. *                               o Our Dataset
+. *                       2) Fig. S5.     Age distribution: sample vs. census
+. *                       3) Table S6.    Sample means vs. census data
+. *                       4) Table S7.    Study sample vs. unvaccinated population
+. *--------------------------------------------------------------------------
+. 
+. 
+. 
+. *------------------------------------------------
+. * 1) Prepare Datasets
+. *------------------------------------------------
+. * Census Data
+. 
+. import excel "$working_ANALYSIS/data/alter_geschlecht_zensus_det.xlsx", sheet("12411-0013") cellrange(A5:CP54) firstrow clear
+(94 vars, 49 obs)
+
+. rename *, lower
+
+. drop if e == . // empty cell
+(1 observation deleted)
+
+. drop unter1jahr-t // above 18
+
+. 
+. *** Adjust to our datapath
+. ** Gender
+. replace gender = "male" if gender == "männlich"
+(16 real changes made)
+
+. replace gender = "female" if gender == "weiblich"
+(16 real changes made)
+
+. replace gender = "total" if gender == "Insgesamt"
+(16 real changes made)
+
+. lab define female1 0 "male" 1 "female" 99 "total"
+
+. encode gender, label(female1) gen(female)
+
+. drop gender
+
+. 
+. ** For all Germany (Totals across counties)
+. foreach var in u v w x y z aa ab ac ad ae af ag ah ai aj ak al am an ao ap aq ar as at au av aw ax ay az ba bb bc bd be bf bg bh bi bj bk bl bm bn b
+> o bp bq br bs bt bu bv bw bx by bz ca cb cc cd ce cf cg ch ci cj ck cl cm cn jahreundmehr {
+  2. egen age_`var' = total(`var'), by(female)
+  3. }
+
+. keep if county == "Berlin" // same across all counties
+(45 observations deleted)
+
+. 
+. rename age_u age18
+
+. rename age_v age19
+
+. rename age_w age20
+
+. rename age_x age21
+
+. rename age_y age22
+
+. rename age_z age23
+
+. rename age_aa age24
+
+. rename age_ab age25
+
+. rename age_ac age26
+
+. rename age_ad age27
+
+. rename age_ae age28
+
+. rename age_af age29
+
+. rename age_ag age30
+
+. rename age_ah age31
+
+. rename age_ai age32
+
+. rename age_aj age33
+
+. rename age_ak age34
+
+. rename age_al age35
+
+. rename age_am age36
+
+. rename age_an age37
+
+. rename age_ao age38
+
+. rename age_ap age39
+
+. rename age_aq age40
+
+. rename age_ar age41
+
+. rename age_as age42
+
+. rename age_at age43
+
+. rename age_au age44
+
+. rename age_av age45
+
+. rename age_aw age46
+
+. rename age_ax age47
+
+. rename age_ay age48
+
+. rename age_az age49
+
+. rename age_ba age50
+
+. rename age_bb age51
+
+. rename age_bc age52
+
+. rename age_bd age53
+
+. rename age_be age54
+
+. rename age_bf age55
+
+. rename age_bg age56
+
+. rename age_bh age57
+
+. rename age_bi age58
+
+. rename age_bj age59
+
+. rename age_bk age60
+
+. rename age_bl age61
+
+. rename age_bm age62
+
+. rename age_bn age63
+
+. rename age_bo age64
+
+. rename age_bp age65
+
+. rename age_bq age66
+
+. rename age_br age67
+
+. rename age_bs age68
+
+. rename age_bt age69
+
+. rename age_bu age70
+
+. rename age_bv age71
+
+. rename age_bw age72
+
+. rename age_bx age73
+
+. rename age_by age74
+
+. rename age_bz age75
+
+. rename age_ca age76
+
+. rename age_cb age77
+
+. rename age_cc age78
+
+. rename age_cd age79
+
+. rename age_ce age80
+
+. rename age_cf age81
+
+. rename age_cg age82
+
+. rename age_ch age83
+
+. rename age_ci age84
+
+. rename age_cj age85
+
+. rename age_ck age86
+
+. rename age_cl age87
+
+. rename age_cm age88
+
+. rename age_cn age89
+
+. rename age_jahreundmehr age90
+
+. *egen age70_above = rowtotal(age70 - age90)
+. 
+. ** Calculate share of pop
+. * Total
+. egen total = rowtotal(age18 - age70)
+
+. * Share of group of total
+. 
+. forvalues i = 18/90 {
+  2. gen share`i' = age`i' / total
+  3. }
+
+. 
+. *age70_above 
+. *rename age70_above age70
+. drop u - insgesamt
+
+. drop county
+
+. save "$working_ANALYSIS/data/census_raw.dta", replace
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/data/census_raw.dta saved
+
+. 
+. 
+. *keep female age18 age19 age20 age21 age22 age23 age24 age25 age26 age27 age28 age29 age30 age31 age32 age33 age34 age35 age36 age37 age38 age39 age
+> 40 age41 age42 age43 age44 age45 age46 age47 age48 age49 age50 age51 age52 age53 age54 age55 age56 age57 age58 age59 age60 age61 age62 age63 age64 a
+> ge65 age66 age67 age68 age69 age70 
+. 
+. 
+. 
+. 
+. ** Cumulative Share
+. order female total share*
+
+. gen number_cum18=share18
+
+. forvalues i = 19/70 {
+  2. egen number_cum`i'=rowtotal(share18-share`i')
+  3. }
+
+. 
+. reshape long age share number_cum, i(female)
+(note: j = 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 6
+> 4 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90)
+(note: number_cum71 not found)
+(note: number_cum72 not found)
+(note: number_cum73 not found)
+(note: number_cum74 not found)
+(note: number_cum75 not found)
+(note: number_cum76 not found)
+(note: number_cum77 not found)
+(note: number_cum78 not found)
+(note: number_cum79 not found)
+(note: number_cum80 not found)
+(note: number_cum81 not found)
+(note: number_cum82 not found)
+(note: number_cum83 not found)
+(note: number_cum84 not found)
+(note: number_cum85 not found)
+(note: number_cum86 not found)
+(note: number_cum87 not found)
+(note: number_cum88 not found)
+(note: number_cum89 not found)
+(note: number_cum90 not found)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                        3   ->     219
+Number of variables                 201   ->       6
+j variable (73 values)                    ->   _j
+xij variables:
+                  age18 age19 ... age90   ->   age
+            share18 share19 ... share90   ->   share
+number_cum18 number_cum19 ... number_cum90->   number_cum
+-----------------------------------------------------------------------------
+
+. rename age population
+
+. rename _j age
+
+. 
+. * Dataset
+. gen data = 2
+
+. save "$working_ANALYSIS/processed/census_clean.dta", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/census_cl
+> ean.dta not found)
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/census_clean.dta
+>  saved
+
+. 
+. 
+. 
+. 
+. *------------------------------------------------
+. * Adjust our data to census data
+. *------------------------------------------------
+. use "$working_ANALYSIS/processed/corona_ger_clean.dta", clear
+(corona-ger-w1)
+
+. keep if wave == 1 // only for first wave
+(821 observations deleted)
+
+. 
+. * Sum in age across gender
+. *replace age = 70 if age >= 70 // if full age distribution
+. 
+. drop if age > 70
+(16 observations deleted)
+
+. gen population = 1
+
+. collapse (sum) population, by(age female)
+
+. sort female age
+
+. 
+. ** Calculate share of pop
+. * Total
+. egen total = total(population), by(female)
+
+. 
+. * Share of group of total
+. gen share = population/total
+
+. 
+. save "$working_ANALYSIS/processed/rep_data.dta", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/rep_data.
+> dta not found)
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/rep_data.dta sav
+> ed
+
+. 
+. 
+. *** Total Across Gender
+. use "$working_ANALYSIS/processed/corona_ger_clean.dta", clear
+(corona-ger-w1)
+
+. keep if wave == 1 // only for first wave
+(821 observations deleted)
+
+. 
+. * Sum in age across gender
+. *replace age = 70 if age >= 70 // if full age distribution
+. 
+. drop if age > 70
+(16 observations deleted)
+
+. 
+. * Replace Female = Total
+. drop female
+
+. generate female = 99
+
+. 
+. 
+. * Sum in age group across sample
+. gen population = 1
+
+. collapse (sum) population, by(age female)
+
+. sort female age
+
+. 
+. ** Calculate share of pop
+. * Total
+. egen total = total(population), by(female)
+
+. 
+. * Share of group of total
+. gen share = population/total
+
+. 
+. save "$working_ANALYSIS/processed/rep_data1.dta", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/rep_data1
+> .dta not found)
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/rep_data1.dta sa
+> ved
+
+. 
+. 
+. *** Apepend to devision by gender
+. use "$working_ANALYSIS/processed/rep_data.dta", clear
+(corona-ger-w1)
+
+. append using "$working_ANALYSIS/processed/rep_data1.dta"
+
+. 
+. *** Reshape to wide
+. reshape wide population share, i(female) j(age)
+(note: j = 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 6
+> 4 65 66 67 68 69 70)
+
+Data                               long   ->   wide
+-----------------------------------------------------------------------------
+Number of obs.                      159   ->       3
+Number of variables                   5   ->     108
+j variable (53 values)              age   ->   (dropped)
+xij variables:
+                             population   ->   population18 population19 ... population70
+                                  share   ->   share18 share19 ... share70
+-----------------------------------------------------------------------------
+
+. 
+. ** Cumulative Share
+. order female total population* share*
+
+. gen number_cum18=share18
+
+. forvalues i = 19/70 {
+  2. egen number_cum`i'=rowtotal(share18-share`i')
+  3. }
+
+. 
+. reshape long population share number_cum, i(female)
+(note: j = 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 6
+> 4 65 66 67 68 69 70)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                        3   ->     159
+Number of variables                 161   ->       6
+j variable (53 values)                    ->   _j
+xij variables:
+population18 population19 ... population70->   population
+            share18 share19 ... share70   ->   share
+number_cum18 number_cum19 ... number_cum70->   number_cum
+-----------------------------------------------------------------------------
+
+. rename _j age
+
+. 
+. *** Dataset
+. gen data = 1
+
+. append using "$working_ANALYSIS/processed/census_clean.dta"
+(note: variable female was float, now double to accommodate using data's values)
+(label female1 already defined)
+
+. 
+. lab define data1 1 "Own Sample" 2 "Census"
+
+. lab val data data1
+
+. 
+. lab define female1 0 "male" 1 "female" 99 "total", replace
+
+. lab val female female1
+
+. order data total female population* share*
+
+. 
+. drop if age > 70
+(60 observations deleted)
+
+. 
+. 
+. save "$working_ANALYSIS/processed/rep.dta", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/rep.dta n
+> ot found)
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/rep.dta saved
+
+. 
+. 
+. 
+. *---------------------------------------------------
+. * 2) Fig. S5.   Age distribution: sample vs. census
+. *---------------------------------------------------
+. 
+. *******
+. * Female
+. ****
+. use "$working_ANALYSIS/processed/rep.dta", clear
+(corona-ger-w1)
+
+. keep if female == 1
+(212 observations deleted)
+
+. *reshape long number_cum share population, i(data)
+. replace number_cum = 1 if number_cum >= .999999
+(0 real changes made)
+
+. *rename _j age_group
+. 
+. 
+. * Cumulative Distribution Function
+. twoway ///
+> (line number_cum age if data==1 , ) /// Our Sample
+> (line number_cum age if data==2 , ) /// Germany
+> , xtitle("Age (in years)") ytitle("Cumulative distribution function") ///
+> title("Female") ///
+> xlabel(18 "18" 30 "30" 40 "40" 50 "50" 60 "60" 70 "70", angle(0)) ///
+> legend(order(1 "Our Sample (Age 18-70)" 2 "Germany (Age 18-70)" ) position(5) ring(0) row())
+
+. graph save "$working_ANALYSIS/results/intermediate/rep_female_cdi", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediat
+> e/rep_female_cdi.gph not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediate/rep_
+> female_cdi.gph saved)
+
+. 
+. 
+. *******
+. * Male
+. ****
+. use "$working_ANALYSIS/processed/rep.dta", clear
+(corona-ger-w1)
+
+. keep if female == 0
+(212 observations deleted)
+
+. *reshape long number_cum share population, i(data)
+. replace number_cum = 1 if number_cum >= .999999
+(2 real changes made)
+
+. *rename _j age_group
+. 
+. * Cumulative Distribution Function
+. twoway ///
+> (line number_cum age if data==1 , ) /// Our Sample
+> (line number_cum age if data==2 , ) /// Germany
+> , xtitle("Age (in years)") ytitle("") ///
+> title("Male") ///
+> xlabel(18 "18" 30 "30" 40 "40" 50 "50" 60 "60" 70 "70", angle(0)) ///
+> legend(order(1 "Our Sample (Age 18-70)" 2 "Germany (Age 18-70)" ) position(5) ring(0) )
+
+. graph save "$working_ANALYSIS/results/intermediate/rep_male_cdi", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediat
+> e/rep_male_cdi.gph not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediate/rep_
+> male_cdi.gph saved)
+
+. 
+. 
+. *******
+. * Total
+. ****
+. use "$working_ANALYSIS/processed/rep.dta", clear
+(corona-ger-w1)
+
+. keep if female == 99
+(212 observations deleted)
+
+. replace number_cum = 1 if number_cum >= .999999
+(2 real changes made)
+
+. 
+. * Cumulative Distribution Function
+. twoway ///
+> (line number_cum age if data==1 , ) /// Our Sample
+> (line number_cum age if data==2 , ) /// Germany
+> , xtitle("Age (in years)") ytitle("") ///
+> title("Total") ///
+> xlabel(18 "18" 30 "30" 40 "40" 50 "50" 60 "60" 70 "70", angle(0)) ///
+> legend(order(1 "Our Sample (Age 18-70)" 2 "Germany (Age 18-70)" ) position() ring() rows(1) )
+
+. graph save "$working_ANALYSIS/results/intermediate/rep_total_cdi", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediat
+> e/rep_total_cdi.gph not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediate/rep_
+> total_cdi.gph saved)
+
+. 
+. 
+. grc1leg "$working_ANALYSIS/results/intermediate/rep_female_cdi" "$working_ANALYSIS/results/intermediate/rep_male_cdi" "$working_ANALYSIS/results/int
+> ermediate/rep_total_cdi", title() rows(1) legendfrom("$working_ANALYSIS/results/intermediate/rep_female_cdi") xsize(7.5)
+
+. gr_edit .plotregion1.graph1.plotregion1.plot1.style.editstyle line(color("220 38 127")) editcopy
+
+. gr_edit .plotregion1.graph2.plotregion1.plot1.style.editstyle line(color("220 38 127")) editcopy
+
+. gr_edit .plotregion1.graph3.plotregion1.plot1.style.editstyle line(color("220 38 127")) editcopy
+
+. gr_edit .legend.Edit, style(labelstyle(size(vsmall))) style(labelstyle(color(custom)))
+(note:  named style custom not found in class color, default attributes used)
+
+. gr_edit .legend.plotregion1.key[1].view.style.editstyle line(color("220 38 127")) editcopy
+
+. gr_edit .plotregion1.graph1.title.style.editstyle size(small) editcopy
+
+. gr_edit .plotregion1.graph2.title.style.editstyle size(small) editcopy
+
+. gr_edit .plotregion1.graph3.title.style.editstyle size(small) editcopy
+
+. graph save "$working_ANALYSIS/results/intermediate/figureS5_age_distribution.gph", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediat
+> e/figureS5_age_distribution.gph not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediate/figu
+> reS5_age_distribution.gph saved)
+
+. graph export "$working_ANALYSIS/results/figures/figureS5_age_distribution.tif", replace width(4500)
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/figures/fig
+> ureS5_age_distribution.tif not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/figures/figureS5_
+> age_distribution.tif written in TIFF format)
+
+. 
+. 
+. 
+. *---------------------------------------------------
+. * 3) Table S6.  Sample means vs. census data
+. *---------------------------------------------------
+. 
+. *** Our Sample
+. use "$working_ANALYSIS/processed/corona_ger_clean.dta", clear
+(corona-ger-w1)
+
+. keep if wave == 1 // only for first wave
+(821 observations deleted)
+
+. 
+. ** Gen: Household Size
+. gen hh_member = hh_member_0_14 + hh_member_14_99
+
+. gen hh_member_cat = hh_member
+
+. replace hh_member_cat = 4 if hh_member>=4
+(42 real changes made)
+
+. tab hh_member_cat, gen(hh_member)
+
+hh_member_c |
+         at |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        228       17.22       17.22
+          1 |        429       32.40       49.62
+          2 |        347       26.21       75.83
+          3 |        169       12.76       88.60
+          4 |        151       11.40      100.00
+------------+-----------------------------------
+      Total |      1,324      100.00
+
+. 
+. ** Gen Education
+. gen abitur = 0
+
+. replace abitur = 1 if edu >= 3 // Abitur / Uni abschluss
+(715 real changes made)
+
+.  
+. ** Summarize
+. sum age female if age <= 70 
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+         age |      1,308    44.97706    14.03115         18         70
+      female |      1,308     .514526    .4999801          0          1
+
+. sum abitur hh_member1 hh_member2 hh_member3 hh_member4 hh_member5 
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      abitur |      1,324    .5400302    .4985833          0          1
+  hh_member1 |      1,324    .1722054    .3777016          0          1
+  hh_member2 |      1,324    .3240181    .4681837          0          1
+  hh_member3 |      1,324    .2620846    .4399346          0          1
+  hh_member4 |      1,324    .1276435    .3338185          0          1
+-------------+---------------------------------------------------------
+  hh_member5 |      1,324    .1140483    .3179901          0          1
+
+. 
+. 
+. *** Germany
+. ** Age
+. use "$working_ANALYSIS/data/census_raw.dta", clear
+
+. reshape long age share , i(female)
+(note: j = 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 6
+> 4 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                        3   ->     219
+Number of variables                 148   ->       5
+j variable (73 values)                    ->   _j
+xij variables:
+                  age18 age19 ... age90   ->   age
+            share18 share19 ... share90   ->   share
+-----------------------------------------------------------------------------
+
+. rename age population
+
+. rename _j age
+
+. 
+. gen weighted_age = age*share
+
+. egen average_age = total(weighted_age) if age < 90, by(female) // 61.05
+(3 missing values generated)
+
+. egen average_age_70 = total(weighted_age) if age<=70, by(female) // 45.03
+(60 missing values generated)
+
+. 
+. ** Gender
+. egen total_female = total(population) if age<=70, by(female)
+(60 missing values generated)
+
+. display 28252814 / 56960324
+.49600866
+
+. 
+. ** Household Size
+. /*
+> Data From Statistisches Bundesamt:
+> https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Bevoelkerung/Haushalte-Familien/Tabellen/1-2-privathaushalte-bundeslaender.html
+> */
+. 
+. clear
+
+. input households single total_shared shared2 shared3 shared4 shared5 hh_member member_per_hh
+
+     househo~s     single  total_s~d    shared2    shared3    shared4    shared5  hh_member  member_~h
+  1. 40545 16476 24069 13778 4915 3970 1407 82181 2.03
+  2. end
+
+. 
+. gen share_single = single / households
+
+. foreach var in shared2 shared3 shared4 shared5 {
+  2. gen share_`var' = `var'/ households
+  3. }
+
+. 
+. ** Education
+. /*
+> From: https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Bevoelkerung/Migration-Integration/Tabellen/migrationshintergrund-schulabschluss.html
+> Fochhochschulreife: 5850
+> Abitur: 19063
+> Gesamt: 81870
+> */
+. display (5850 + 19063) / 81870
+.3042995
+
+. 
+. 
+. 
+. 
+. 
+. *---------------------------------------------------
+. * 4) Table S7.  Study sample vs. unvaccinated population
+. *---------------------------------------------------
+. 
+. *Extracting vaccination numbers
+. 
+. *import delimited "https://raw.githubusercontent.com/robert-koch-institut/COVID-19-Impfungen_in_Deutschland/master/Aktuell_Deutschland_Landkreise_CO
+> VID-19-Impfungen.csv" , clear ///we don't have to download it ever time again
+> *save "$datapath\vaccination_landkreis_raw.dta", replace
+. 
+. use"$working_ANALYSIS/data/vaccination_landkreis_raw.dta", clear // for your convenience the dataset is already stored in the replication package
+
+. rename landkreisid_impfort AGS
+
+. drop if AGS == "u"
+(400 observations deleted)
+
+. destring AGS, replace
+AGS: all characters numeric; replaced as int
+
+. lab var AGS "Amtlichen Gemeindeschluessel"
+
+. 
+. drop if altersgruppe == "12-17" | altersgruppe == "u"
+(138,660 observations deleted)
+
+. 
+. gen group_id = 1 if altersgruppe == "18-59"
+(245,723 missing values generated)
+
+. replace group_id = 2 if altersgruppe == "60+"
+(245,723 real changes made)
+
+. replace group_id = 3 if altersgruppe == "12-17"
+(0 real changes made)
+
+. 
+. gen date = date(impfdatum, "YMD")
+
+. format date %td
+
+. drop if date > date("20210602","YMD") //select here the time horizen you want to count. In this case, we only need vaccination numbers until 2021-06
+> -02
+(328,530 observations deleted)
+
+. 
+. gen temp = (AGS*10+impfschutz)*10+group_id //to create an id for wide transformation
+
+. drop impfdatum
+
+. reshape wide anzahl, i(temp) j(date)
+(note: j = 22276 22277 22278 22279 22280 22281 22282 22283 22284 22285 22286 22287 22288 22289 22290 22291 22292 22293 22294 22295 22296 22297 22298 2
+> 2299 22300 22301 22302 22303 22304 22305 22306 22307 22308 22309 22310 22311 22312 22313 22314 22315 22316 22317 22318 22319 22320 22321 22322 22323
+>  22324 22325 22326 22327 22328 22329 22330 22331 22332 22333 22334 22335 22336 22337 22338 22339 22340 22341 22342 22343 22344 22345 22346 22347 223
+> 48 22349 22350 22351 22352 22353 22354 22355 22356 22357 22358 22359 22360 22361 22362 22363 22364 22365 22366 22367 22368 22369 22370 22371 22372 2
+> 2373 22374 22375 22376 22377 22378 22379 22380 22381 22382 22383 22384 22385 22386 22387 22388 22389 22390 22391 22392 22393 22394 22395 22396 22397
+>  22398 22399 22400 22401 22402 22403 22404 22405 22406 22407 22408 22409 22410 22411 22412 22413 22414 22415 22416 22417 22418 22419 22420 22421 224
+> 22 22423 22424 22425 22426 22427 22428 22429 22430 22431 22432 22433)
+
+Data                               long   ->   wide
+-----------------------------------------------------------------------------
+Number of obs.                   173190   ->    1624
+Number of variables                   7   ->     163
+j variable (158 values)            date   ->   (dropped)
+xij variables:
+                                 anzahl   ->   anzahl22276 anzahl22277 ... anzahl22433
+-----------------------------------------------------------------------------
+
+. egen no_vaccinations = rowtotal(anzahl22276 - anzahl22433) //add last anzahl*date combination
+
+. reshape long anzahl, i(temp) j(date)
+(note: j = 22276 22277 22278 22279 22280 22281 22282 22283 22284 22285 22286 22287 22288 22289 22290 22291 22292 22293 22294 22295 22296 22297 22298 2
+> 2299 22300 22301 22302 22303 22304 22305 22306 22307 22308 22309 22310 22311 22312 22313 22314 22315 22316 22317 22318 22319 22320 22321 22322 22323
+>  22324 22325 22326 22327 22328 22329 22330 22331 22332 22333 22334 22335 22336 22337 22338 22339 22340 22341 22342 22343 22344 22345 22346 22347 223
+> 48 22349 22350 22351 22352 22353 22354 22355 22356 22357 22358 22359 22360 22361 22362 22363 22364 22365 22366 22367 22368 22369 22370 22371 22372 2
+> 2373 22374 22375 22376 22377 22378 22379 22380 22381 22382 22383 22384 22385 22386 22387 22388 22389 22390 22391 22392 22393 22394 22395 22396 22397
+>  22398 22399 22400 22401 22402 22403 22404 22405 22406 22407 22408 22409 22410 22411 22412 22413 22414 22415 22416 22417 22418 22419 22420 22421 224
+> 22 22423 22424 22425 22426 22427 22428 22429 22430 22431 22432 22433)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                     1624   ->  256592
+Number of variables                 164   ->       8
+j variable (158 values)                   ->   date
+xij variables:
+anzahl22276 anzahl22277 ... anzahl22433   ->   anzahl
+-----------------------------------------------------------------------------
+
+. format date %td
+
+. drop temp
+
+. 
+. keep if date == date("20210602","YMD") //the cut-off we are interested in
+(254,968 observations deleted)
+
+. keep if impfschutz == 1 //all first dose vaccinations (2=fully vaccinated, 3=refresh)
+(820 observations deleted)
+
+. 
+. drop anzahl altersgruppe
+
+. reshape wide no_vaccinations, i(group_id) j(AGS)
+(note: j = 1001 1002 1003 1004 1051 1053 1054 1055 1056 1057 1058 1059 1060 1061 1062 2000 3101 3102 3103 3151 3153 3154 3155 3157 3158 3159 3241 3251
+>  3252 3254 3255 3256 3257 3351 3352 3353 3354 3355 3356 3357 3358 3359 3360 3361 3401 3402 3403 3404 3405 3451 3452 3453 3454 3455 3456 3457 3458 34
+> 59 3460 3461 3462 4011 4012 5111 5112 5113 5114 5116 5117 5119 5120 5122 5124 5154 5158 5162 5166 5170 5314 5315 5316 5334 5358 5362 5366 5370 5374 
+> 5378 5382 5512 5513 5515 5554 5558 5562 5566 5570 5711 5754 5758 5762 5766 5770 5774 5911 5913 5914 5915 5916 5954 5958 5962 5966 5970 5974 5978 641
+> 1 6412 6413 6414 6431 6432 6433 6434 6435 6436 6437 6438 6439 6440 6531 6532 6533 6534 6535 6611 6631 6632 6633 6634 6635 6636 7111 7131 7132 7133 7
+> 134 7135 7137 7138 7140 7141 7143 7211 7231 7232 7233 7235 7311 7312 7313 7314 7315 7316 7317 7318 7319 7320 7331 7332 7333 7334 7335 7336 7337 7338
+>  7339 7340 8111 8115 8116 8117 8118 8119 8121 8125 8126 8127 8128 8135 8136 8211 8212 8215 8216 8221 8222 8225 8226 8231 8235 8236 8237 8311 8315 83
+> 16 8317 8325 8326 8327 8335 8336 8337 8415 8416 8417 8421 8425 8426 8435 8436 8437 9161 9162 9163 9171 9172 9173 9174 9175 9176 9177 9178 9179 9180 
+> 9181 9182 9183 9184 9185 9186 9187 9188 9189 9190 9261 9262 9263 9271 9272 9273 9274 9275 9276 9277 9278 9279 9361 9362 9363 9371 9372 9373 9374 937
+> 5 9376 9377 9461 9462 9463 9464 9471 9472 9473 9474 9475 9476 9477 9478 9479 9561 9562 9563 9564 9565 9571 9572 9573 9574 9575 9576 9577 9661 9662 9
+> 663 9671 9672 9673 9674 9675 9676 9677 9678 9679 9761 9762 9763 9764 9771 9772 9773 9774 9775 9776 9777 9778 9779 9780 10041 10042 10043 10044 10045
+>  10046 11000 12051 12052 12053 12054 12060 12061 12062 12063 12064 12065 12066 12067 12068 12069 12070 12071 12072 12073 13003 13004 13071 13072 130
+> 73 13074 13075 13076 14511 14521 14522 14523 14524 14612 14625 14626 14627 14628 14713 14729 14730 15001 15002 15003 15081 15082 15083 15084 15085 1
+> 5086 15087 15088 15089 15090 15091 16051 16052 16053 16054 16055 16056 16061 16062 16063 16064 16065 16066 16067 16068 16069 16070 16071 16072 16073
+>  16074 16075 16076 16077 17000)
+
+Data                               long   ->   wide
+-----------------------------------------------------------------------------
+Number of obs.                      804   ->       2
+Number of variables                   5   ->     405
+j variable (402 values)             AGS   ->   (dropped)
+xij variables:
+                        no_vaccinations   ->   no_vaccinations1001 no_vaccinations1002 ... no_vaccinations17000
+-----------------------------------------------------------------------------
+
+. egen no_vacc_age = rowtotal(no_vaccinations1001-no_vaccinations17000) //check if it is the sum over all variables!!
+
+. keep group_id no_vacc_age date
+
+. 
+. rename group_id age_group
+
+. lab define age_l 1 "18-59" 2 "60+"
+
+. lab value age_group age_l
+
+. 
+. save "$working_ANALYSIS/processed/no_vacc_age_Mai.dta", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/no_vacc_a
+> ge_Mai.dta not found)
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/no_vacc_age_Mai.
+> dta saved
+
+. 
+. 
+. *Population of Germany (>=18 years)
+. 
+. import delimited "$working_ANALYSIS/data/census2020_age_gender.csv", delimiter(";") varnames(8) clear //source: https://www-genesis.destatis.de/
+Note: Unmatched quote while processing row 97; this can be due to a formatting problem in the file or because a quoted data element spans multiple
+    lines. You should carefully inspect your data after importing. Consider using option bindquote(strict) if quoted data spans multiple lines or
+    option bindquote(nobind) if quotes are not used for binding data.
+Note: Unmatched quote while processing row 99; this can be due to a formatting problem in the file or because a quoted data element spans multiple
+    lines. You should carefully inspect your data after importing. Consider using option bindquote(strict) if quoted data spans multiple lines or
+    option bindquote(nobind) if quotes are not used for binding data.
+(5 vars, 92 obs)
+
+. gen date = date(v1, "DMY")
+(5 missing values generated)
+
+. format date %td
+
+. drop v1 deutsche ausländer
+
+. rename insgesamt population
+
+. rename v2 age_lable
+
+. order date population
+
+. 
+. gen age = _n
+
+. replace age = age-1
+(92 real changes made)
+
+. egen age_population1 = total(population) if age<18
+(74 missing values generated)
+
+. egen age_population2 = total(population) if age>=18 & age<=59
+(50 missing values generated)
+
+. egen age_population3 = total(population) if age>=60 & age<=85
+(66 missing values generated)
+
+. egen age_population = rowtotal(age_population1 age_population2 age_population3)
+
+. drop age_population1 age_population2 age_population3
+
+. 
+. gen age_group = 0 if age<18
+(74 missing values generated)
+
+. replace age_group = 1 if age>=18 & age<=59
+(42 real changes made)
+
+. replace age_group = 2 if age>=60 & age<=85
+(26 real changes made)
+
+. lab define age_l 0 "0-17" 1 "18-59" 2 "60+"
+
+. lab value age_group age_l
+
+. 
+. drop if age_group == .
+(6 observations deleted)
+
+. bysort age_group: gen first = _n
+
+. keep if first == 1
+(83 observations deleted)
+
+. 
+. egen pop_total = total(age_population) //83155024
+
+. 
+. keep date age_group age_population
+
+. compress
+  variable date was float now int
+  variable age_group was float now byte
+  (15 bytes saved)
+
+. 
+. save "$working_ANALYSIS/processed/census_age_population.dta", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/census_ag
+> e_population.dta not found)
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/census_age_popul
+> ation.dta saved
+
+. 
+. 
+. use "$working_ANALYSIS/processed/census_age_population.dta", clear
+
+. drop if age_group == 0
+(1 observation deleted)
+
+. 
+. merge 1:1 age_group using "$working_ANALYSIS/processed/no_vacc_age_Mai.dta"
+(note: variable age_group was byte, now float to accommodate using data's values)
+(label age_l already defined)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                                 2  (_merge==3)
+    -----------------------------------------
+
+. drop _merge
+
+. order date age_group age_population no_vacc_age
+
+. 
+. gen vacc_share_age = no_vacc_age / age_population
+
+. lab var vacc_share_age "Percentage of vaccinated people per age group"
+
+. gen no_unvacc_age = age_population - no_vacc_age
+
+. lab var no_unvacc_age "Number of unvaccinated people per age group"
+
+. 
+. egen total_unvacc_pop_age = total(no_unvacc_age)
+
+. gen share_unvacc_age = no_unvacc_age/total_unvacc_pop_age
+
+. 
+. /*              population      vccinated       Percent
+> 18-59   45321312        18044528        .39814663
+> 60+             24089772        18390390        .76341069
+>                                         --------        --------
+>                                         32976166        1.0
+> 
+>                                         
+> *Unvaccinated Population of Germany (>=18 years)
+>                                 
+>                 population      unvccinated     Percent
+> 18-59   45321312        27276784        .82716662
+> 60+             24089772        5699382         .17283337
+>                                         --------        --------
+>                                         32976166        1.0                             */
+. 
+. 
+. //Our sample
+. 
+. use "$working_ANALYSIS/processed/corona_ger_clean.dta", clear
+(corona-ger-w1)
+
+. keep if wave==1
+(821 observations deleted)
+
+. gen population = 1
+
+. collapse (sum) population, by(age)
+
+. sort age
+
+. 
+. egen total_pop = total(population)
+
+. egen age_population2 = total(population) if age>=18 & age<=59
+(18 missing values generated)
+
+. egen age_population3 = total(population) if age>=60 & age<=85
+(42 missing values generated)
+
+. egen age_population = rowtotal( age_population2 age_population3)
+
+. drop age_population2 age_population3
+
+. 
+. gen age_group = 1 if age>=18 & age<=59
+(18 missing values generated)
+
+. replace age_group = 2 if age>=60 & age<=85
+(18 real changes made)
+
+. lab define age_l 0 "0-17" 1 "18-59" 2 "60+"
+
+. lab value age_group age_l
+
+. bysort age_group: gen first = _n
+
+. keep if first == 1
+(58 observations deleted)
+
+. 
+. gen age_pop_share = age_population/total_pop
+
+. keep age_group age_population age_pop_share
+
+. order age_group age_population age_pop_share
+
+. 
+. /*              unvccinated             Percent
+> 18-59   1121                    .8466768
+> 60+             203                             .1533233
+>                 ---------               ---------
+>                 1324                    1.0
+>                 */
+. 
+. 
+. 
+. 
+.                 
+. ** EOF
+. 
+end of do-file
+
+. do "$working_ANALYSIS/scripts/07_AppendixS10.do"
+
+. *--------------------------------------------------
+. * SCRIPT: 07_AppendixS10.do
+. * PURPOSE: External validity - vaccination rates in sample compared to German average
+. *--------------------------------------------------
+. 
+. *Data Preperation
+. 
+. *Vaccination rate in our sample
+. use "$working_ANALYSIS/processed/corona_ger_clean.dta", clear
+(corona-ger-w1)
+
+. keep if wave==2
+(1,324 observations deleted)
+
+. keep wave vaccinated treatment
+
+. bysort treatment: gen N = _n
+
+. bysort treatment: egen treatment_sample = max(N)
+
+. bysort treatment: egen treatment_vaccinated = total(vaccinated) //141 139 152 125
+
+. gen vacc_share_experiment = treatment_vaccinated / treatment_sample
+
+. keep if N==1
+(817 observations deleted)
+
+. 
+. bysort treatment: gen vacc_share_experiment2 = treatment_vaccinated/treatment_sample
+
+. gen unvacc_likelihood_experiment = 1-vacc_share_experiment
+
+. 
+. gen date = date("20210602","YMD") //technically the correct date is Sep. 18, yet it's easier to program like this
+
+. format date %td
+
+. 
+. keep date treatment unvacc_likelihood_experiment
+
+. reshape wide unvacc_likelihood_experiment, i(date) j(treatment)
+(note: j = 0 1 2 3)
+
+Data                               long   ->   wide
+-----------------------------------------------------------------------------
+Number of obs.                        4   ->       1
+Number of variables                   3   ->       5
+j variable (4 values)         treatment   ->   (dropped)
+xij variables:
+           unvacc_likelihood_experiment   ->   unvacc_likelihood_experiment0 unvacc_likelihood_experiment1 ... unvacc_likelihood_experiment3
+-----------------------------------------------------------------------------
+
+. rename unvacc_likelihood_experiment0 unvacc_control
+
+. rename unvacc_likelihood_experiment1 unvacc_debunk
+
+. rename unvacc_likelihood_experiment2 unvacc_benefits
+
+. rename unvacc_likelihood_experiment3 unvacc_facilitation
+
+. save "$working_ANALYSIS/processed/unvacc_share_experiment", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/unvacc_sh
+> are_experiment.dta not found)
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/unvacc_share_exp
+> eriment.dta saved
+
+. 
+. 
+. *import delimited "https://raw.githubusercontent.com/robert-koch-institut/COVID-19-Impfungen_in_Deutschland/master/Aktuell_Deutschland_Landkreise_CO
+> VID-19-Impfungen.csv" , clear //we don't have to download it ever time again (15.12.2021)
+. *save "$datapath\vaccination_landkreis_raw.dta", replace
+. use "$working_ANALYSIS/data/vaccination_landkreis_raw.dta", clear //so that we don't have to always download the data
+
+. 
+. rename landkreisid_impfort AGS
+
+. drop if AGS == "u"
+(400 observations deleted)
+
+. destring AGS, replace
+AGS: all characters numeric; replaced as int
+
+. lab var AGS "Amtlichen Gemeindeschluessel"
+
+. 
+. drop if altersgruppe == "u"
+(0 observations deleted)
+
+. drop if altersgruppe == "12-17" //we are only interested in people 18+ years old
+(138,660 observations deleted)
+
+. keep if impfschutz == 1 //all first dose vaccinations (2=fully vaccinated, 3=refresh)
+(276,220 observations deleted)
+
+. 
+. gen age_group = 1 if altersgruppe == "18-59"
+(107,517 missing values generated)
+
+. replace age_group = 2 if altersgruppe == "60+"
+(107,517 real changes made)
+
+. replace age_group = 3 if altersgruppe == "12-17"
+(0 real changes made)
+
+. 
+. gen date = date(impfdatum, "YMD")
+
+. format date %td
+
+. 
+. *drop if date > date("20210918","YMD") //select here the time horizen you want to count. The last survey was completed on 2021-09-18.
+. 
+. bysort age_group (date): gen cum_vaccines_AGS = sum(anzahl)
+
+. bysort age_group date: egen cum_daily_vaccines = max(cum_vaccines_AGS)
+
+. bysort age_group date: gen first = _n
+
+. keep if first == 1
+(224,794 observations deleted)
+
+. keep date age_group cum_daily_vaccines
+
+. order date age_group cum_daily_vaccines
+
+. sort date age_group cum_daily_vaccines
+
+. 
+. gen vaccines_last_day = cum_daily_vaccines if date==date("20210918","YMD")
+(704 missing values generated)
+
+. egen cum_vaccines = total(vaccines_last_day) //51,093,100 (inclduing 12-17 year olds: 52,850,700)
+
+. 
+. save "$working_ANALYSIS/processed/cum_daily_vaccination", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/cum_daily
+> _vaccination.dta not found)
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/cum_daily_vaccin
+> ation.dta saved
+
+. use "$working_ANALYSIS/processed/cum_daily_vaccination", clear
+
+. 
+. merge m:1 age_group using "$working_ANALYSIS/processed/census_age_population.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             1
+        from master                         0  (_merge==1)
+        from using                          1  (_merge==2)
+
+    matched                               706  (_merge==3)
+    -----------------------------------------
+
+. keep if _merge == 3
+(1 observation deleted)
+
+. sort date
+
+. bysort date: egen total_population = total(age_population)
+
+. 
+. rename cum_daily_vaccines cum_daily_vaccines_age
+
+. bysort date: egen cum_daily_vaccines = total(cum_daily_vaccines_age)
+
+. bysort date: gen first = _n
+
+. keep if first == 1
+(353 observations deleted)
+
+. 
+. keep date cum_daily_vaccines total_population
+
+. 
+. gen vacc_share = cum_daily_vaccines/total_population //vaccination rate here is 74% for the total population (incl. 0-17 years) it is 64%
+
+. gen unvacc_likelihood = 1-vacc_share
+
+. 
+. gen unvacc_likelihood_start = unvacc_likelihood if date==date("20210602","YMD")
+(352 missing values generated)
+
+. gen unvacc_likelihood_end = unvacc_likelihood if date==date("20210918","YMD")
+(352 missing values generated)
+
+. egen unvacc_likelihood_germany = rowtotal(unvacc_likelihood_start unvacc_likelihood_end)
+
+. replace unvacc_likelihood_germany = . if unvacc_likelihood_germany == 0
+(351 real changes made, 351 to missing)
+
+. 
+. 
+. merge 1:1 date using "$working_ANALYSIS/processed/unvacc_share_experiment"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           352
+        from master                       352  (_merge==1)
+        from using                          0  (_merge==2)
+
+    matched                                 1  (_merge==3)
+    -----------------------------------------
+
+. keep date unvacc_likelihood unvacc_likelihood_start unvacc_likelihood_end unvacc_likelihood_germany unvacc_control unvacc_debunk unvacc_benefits unv
+> acc_facilitation
+
+. 
+. foreach x in unvacc_control unvacc_debunk unvacc_benefits unvacc_facilitation {
+  2.         replace `x' = `x' * unvacc_likelihood
+  3.         egen  `x'_end = max(`x')
+  4.         replace `x'_end = . if date!=date("20210918","YMD")
+  5.         replace `x' = `x'_end if date==date("20210918","YMD")
+  6.         replace `x' = unvacc_likelihood if date==date("20210602","YMD")
+  7. }
+(1 real change made)
+(352 real changes made, 352 to missing)
+(1 real change made)
+(1 real change made)
+(1 real change made)
+(352 real changes made, 352 to missing)
+(1 real change made)
+(1 real change made)
+(1 real change made)
+(352 real changes made, 352 to missing)
+(1 real change made)
+(1 real change made)
+(1 real change made)
+(352 real changes made, 352 to missing)
+(1 real change made)
+(1 real change made)
+
+. 
+. keep date unvacc_likelihood unvacc_likelihood_germany unvacc_control unvacc_debunk unvacc_benefits unvacc_facilitation
+
+. 
+. save "$working_ANALYSIS/processed/cum_daily_vaccination_figures", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/cum_daily
+> _vaccination_figures.dta not found)
+file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/processed/cum_daily_vaccin
+> ation_figures.dta saved
+
+. 
+. 
+. *Fig a) Share of unvaccinated over time
+. use "$working_ANALYSIS/processed/cum_daily_vaccination_figures", clear
+
+. drop if date<date("20210501","YMD")
+(125 observations deleted)
+
+. drop if date>=date("20211101","YMD")
+(44 observations deleted)
+
+. 
+. twoway (scatter unvacc_likelihood date, connect(L) ms(none) xline(22433, lpattern(dash)) xline(22541, lpattern(dash))) ///
+>         (scatter unvacc_control date, connect(L) ms(none) ) ///
+>         (scatter unvacc_debunk date, connect(L) ms(none) ) ///
+>         (scatter unvacc_benefits date, connect(L) ms(none) ) ///
+>         (scatter unvacc_facilitation date, connect(L) ms(none) ), legend(order(1 "Germany" 2 "C: Control" 3 "T1: Debunking" 4 "T2: Benefits" 5 "T3: 
+> Facilitation") pos(2) cols(1) ring(0)) ytitle("Unvaccination rate (18 yeras and older)") xtitle("") title("{bf:A } Unvaccination rate Germany", pos(
+> 11) span) 
+(note:  named style medthin not found in class linestyle, default attributes used)
+
+. graph save "$working_ANALYSIS/results/intermediate/FigureS10_a", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediat
+> e/FigureS10_a.gph not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediate/Figu
+> reS10_a.gph saved)
+
+. 
+.         
+. 
+. 
+. *Fig b) Likellihood of getting vaccinated
+. 
+. use "$working_ANALYSIS/processed/corona_ger_clean.dta", clear
+(corona-ger-w1)
+
+. keep if wave==2
+(1,324 observations deleted)
+
+. 
+. cibar vaccinated, over(treatment)   graphopts(graphregion(fcolor(none)) yline(.40269291, lpattern(dash) lcolor(gray) ) text(.40269291 4.8 "German   
+> average", orientation(vertical) size(small) color(gray) ) ylab(0(0.1)1) legend(pos(2) ring(0) cols(1)) ytitle("Likellihood of getting vaccinated") t
+> itle("{bf:B } Likelihood of getting vaccinated", pos(11) span) ) 
+
+. graph save "$working_ANALYSIS/results/intermediate/FigureS10_b", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediat
+> e/FigureS10_b.gph not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediate/Figu
+> reS10_b.gph saved)
+
+. 
+. 
+. graph combine "$working_ANALYSIS/results/intermediate/FigureS10_a" "$working_ANALYSIS/results/intermediate/FigureS10_b", row(1) xsize(7.5)
+(note:  named style medthin not found in class linestyle, default attributes used)
+(note:  named style medthin not found in class linestyle, default attributes used)
+
+. gr_edit .plotregion1.graph1.legend.xoffset = 4
+
+. gr_edit .plotregion1.graph1.yoffset = -1
+
+. gr_edit .plotregion1.graph1.title.yoffset = 1
+
+. gr save "$working_ANALYSIS/results/intermediate/figureS10_external_validity.gph", replace
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediat
+> e/figureS10_external_validity.gph not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/intermediate/figu
+> reS10_external_validity.gph saved)
+
+. gr export "$working_ANALYSIS/results/figures/figureS10_external_validity.tif", replace width(4500)
+(note: file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/figures/fig
+> ureS10_external_validity.tif not found)
+(file C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/results/figures/figureS10
+> _external_validity.tif written in TIFF format)
+
+. 
+. 
+. 
+. 
+. 
+. ** EOF
+. 
+end of do-file
+
+. 
+. * End log
+. di "End date and time: $S_DATE $S_TIME"
+End date and time: 25 Apr 2022 15:08:25
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\istei\Google Drive\Promotion\1_Projects\Corona_Deutschland\Submissions\PLOS ONE\Submission 2\replication_PLOS/scripts/logs/2022.
+> 04.25-15.02.18.log.txt
+  log type:  text
+ closed on:  25 Apr 2022, 15:08:25
+------------------------------------------------------------------------------------------------------------------------------------------------------

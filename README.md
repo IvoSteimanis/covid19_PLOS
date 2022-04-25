@@ -1,6 +1,6 @@
 # Replication Package
 This repository contains the raw data and code that replicates tables and figures for the following paper: <br><br>
-__Title:__ Repeated information of benefits reduce COVID-19 vaccination hesitancy: Experimental evidence from Germany <br>
+__Title:__ Repeated information of benefits reduces COVID-19 vaccination hesitancy: Experimental evidence from Germany <br>
 __Authors:__ Max Burger<sup>1,*</sup>, Matthias Mayer<sup>1</sup> & Ivo Steimanis<sup>1</sup> <br>
 __Affiliations:__ <sup>1</sup> Department of Economics, Philipps University Marburg, 35032 Marburg, Germany <br>
 __*Correspondence to:__ Max Burger maximilian.burger@wiwi.uni-marburg.de <br>
@@ -8,7 +8,7 @@ __ORCID:__ Burger: 0000-0003-2334-3885, Mayer: 0000-0003-0323-9124, Steimanis: 0
 __Classification:__ Social Sciences, Economic Sciences <br>
 __Keywords:__ vaccination hesitancy, vaccination intentions, vaccination action, survey experiment, repeated information <br>
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6242620.svg)](https://doi.org/10.5281/zenodo.6242620)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6327480.svg)](https://doi.org/10.5281/zenodo.6327480)
 ## Abstract
 __Background:__ Many countries, such as Germany, struggle to vaccinate enough people against COVID-19 despite the availability of safe and efficient vaccines. With new variants emerging and the need for booster vaccinations, overcoming vaccination hesitancy gains importance. The research to date has unveiled some promising, albeit contentious, interventions to increase vaccination intentions. However, these have yet to be tested for their effectiveness in increasing vaccination rates. <br><br>
 __Methods & Results:__ We conducted a preregistered survey experiment with N=1,324 participants in Germany in May/June 2021, which was followed by a series of emails reminding participants to get vaccinated in August and concluded by a follow-up survey in September. We experimentally assess whether debunking vaccination myths, highlighting the benefits of being vaccinated, or merely sending vaccination reminders decreases hesitancy. In the survey experiment, we find no increase in the intention to vaccinate regardless of the information provided. However, communicating vaccination benefits over several weeks reduced vaccination hesitancy, i.e., not being vaccinated, by 9 percentage points, which translates into a 27% reduction compared to the control group. Debunking vaccination myths and reminders alone also decreased hesitancy, yet not significantly.<br><br>

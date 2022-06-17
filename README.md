@@ -15,7 +15,7 @@ __Methods & Results:__ We conducted a preregistered survey experiment with N=1,3
 __Discussion:__ Our findings suggest that if soft governmental interventions such as information campaigns are employed, highlighting benefits should be given preference over debunking vaccination myths. Furthermore, it seems that repeated messages affect vaccination action while one-time messages might be insufficient, even for increasing vaccination intentions. Our study highlights the importance of testing interventions outside of survey experiments that are limited to measuring vaccination intentions – not actions – and immediate changes in attitudes and intentions – not long-term changes.
 
 ## License
-The data are licensed under a Creative Commons Attribution 4.0 International Public License. The code is licensed under a Modified BSD License. See __LICENSE.txt__ for details.
+The data and code are licensed under a Creative Commons Attribution 4.0 International Public License. See __LICENSE.txt__ for details.
 
 ## Software requirements
 All analysis were done in Stata version 16:
